@@ -1,9 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import * as Font from 'expo-font';
 
 import colors from './Constants/colors';
+import Drawer from './Routes/Drawer';
 
 export default class App extends Component {
   constructor(props) {
@@ -34,12 +36,10 @@ export default class App extends Component {
     }
 
     return (
-      <View style={styles.container}>
-        <StatusBar style='auto' />
-        <Text style={styles.text}>
-          Open up App.js to start working on your app!
-        </Text>
-      </View>
+      <SafeAreaProvider style={styles.container}>
+        <StatusBar style='light' backgroundColor='#506257' />
+        <Drawer />
+      </SafeAreaProvider>
     );
   }
 }
@@ -48,8 +48,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   containerLoading: {
     flex: 1,
