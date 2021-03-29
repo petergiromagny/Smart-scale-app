@@ -66,6 +66,7 @@ typings/
 *.tgz
 
 # Yarn Integrity file
+yarn.lock
 .yarn-integrity
 
 # dotenv environment variables file
@@ -102,3 +103,7 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Expo files
+.expo
+.expo-shared
