@@ -1,48 +1,23 @@
-import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, View, ActivityIndicator } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import * as Font from 'expo-font';
 
+/**
+ * @import Fonts
+ */
+import PopRegular from './Assets/Font/Poppins-Regular.ttf';
+import PopMediumItalic from './Assets/Font/Poppins-MediumItalic.ttf';
+import PopMedium from './Assets/Font/Poppins-Medium.ttf';
+import PopBoldItalic from './Assets/Font/Poppins-BoldItalic.ttf';
+import PopBold from './Assets/Font/Poppins-Bold.ttf';
+
+/**
+ * @import Components
+ */
 import colors from './Constants/colors';
 import Drawer from './Routes/Drawer';
-
-export default class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      fontsLoaded: false,
-    };
-  }
-
-  async componentDidMount() {
-    await Font.loadAsync({
-      PoppinsRegular: require('./Assets/Font/Poppins-Regular.ttf'),
-      PoppinsMediumItalic: require('./Assets/Font/Poppins-MediumItalic.ttf'),
-      PoppinsMedium: require('./Assets/Font/Poppins-Medium.ttf'),
-      PoppinsBoldItalic: require('./Assets/Font/Poppins-BoldItalic.ttf'),
-      PoppinsBold: require('./Assets/Font/Poppins-Bold.ttf'),
-    });
-    this.setState({ fontsLoaded: true });
-  }
-
-  render() {
-    if (!this.state.fontsLoaded) {
-      return (
-        <View style={styles.containerLoading}>
-          <ActivityIndicator color={colors.green} size={50} />
-        </View>
-      );
-    }
-
-    return (
-      <SafeAreaProvider style={styles.container}>
-        <StatusBar style='light' backgroundColor='#506257' />
-        <Drawer />
-      </SafeAreaProvider>
-    );
-  }
-}
 
 const styles = StyleSheet.create({
   container: {
@@ -59,3 +34,44 @@ const styles = StyleSheet.create({
     fontFamily: 'PoppinsMedium',
   },
 });
+
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      fontsLoaded: false,
+    };
+  }
+
+  async componentDidMount() {
+    await Font.loadAsync({
+      PoppinsRegular: PopRegular,
+      PoppinsMediumItalic: PopMediumItalic,
+      PoppinsMedium: PopMedium,
+      PoppinsBoldItalic: PopBoldItalic,
+      PoppinsBold: PopBold,
+    });
+    this.setState({
+      fontsLoaded: true,
+    });
+  }
+
+  render() {
+    const { fontsLoaded } = this.state;
+
+    if (!fontsLoaded) {
+      return (
+        <View style={styles.containerLoading}>
+          <ActivityIndicator color={colors.green} size={50} />
+        </View>
+      );
+    }
+
+    return (
+      <SafeAreaProvider style={styles.container}>
+        <StatusBar style='light' backgroundColor='#506257' />
+        <Drawer />
+      </SafeAreaProvider>
+    );
+  }
+}

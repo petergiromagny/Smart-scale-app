@@ -1,14 +1,23 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, View } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import colors from '../Constants/colors';
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.background,
+  },
+});
 
 export default class Settings extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      // Add State
+    };
   }
 
   render() {
@@ -19,10 +28,3 @@ export default class Settings extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background,
-  },
-});
