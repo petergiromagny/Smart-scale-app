@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, ActivityIndicator, Platform } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import * as Font from 'expo-font';
 
@@ -30,20 +30,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  text: {
-    fontFamily: 'PoppinsMedium',
-  },
+  text: { fontFamily: 'PoppinsMedium' },
 });
 
 export default class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      fontsLoaded: false,
-    };
+    this.barColor = 'light';
+    this.state = { fontsLoaded: false };
   }
 
   async componentDidMount() {
+    if (Platform.OS === 'ios') {
+      this.barColor = 'dark';
+    }
     await Font.loadAsync({
       PoppinsRegular: PopRegular,
       PoppinsMediumItalic: PopMediumItalic,
@@ -51,9 +51,7 @@ export default class App extends Component {
       PoppinsBoldItalic: PopBoldItalic,
       PoppinsBold: PopBold,
     });
-    this.setState({
-      fontsLoaded: true,
-    });
+    this.setState({ fontsLoaded: true });
   }
 
   render() {
@@ -69,7 +67,7 @@ export default class App extends Component {
 
     return (
       <SafeAreaProvider style={styles.container}>
-        <StatusBar style='light' backgroundColor='#506257' />
+        <StatusBar style={this.barColor} backgroundColor='#506257' />
         <Drawer />
       </SafeAreaProvider>
     );
