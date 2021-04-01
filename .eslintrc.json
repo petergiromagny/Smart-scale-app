@@ -17,17 +17,22 @@
     "object-curly-newline": [
       "error",
       {
-        "ObjectExpression": "always",
+        "ObjectExpression": { "multiline": false, "minProperties": 2 },
         "ObjectPattern": { "multiline": true, "minProperties": 3 },
-        "ImportDeclaration": { "multiline": true, "minProperties": 5 },
+        "ImportDeclaration": { "multiline": true, "minProperties": 6 },
         "ExportDeclaration": "never"
       }
     ],
     "jsx-quotes": ["error", "prefer-single"],
-    "react/style-prop-object": [
-      "error",
+    "react/prop-types": [0],
+    "react/jsx-props-no-spreading": [
+      2,
       {
-        "allow": ["StatusBar"]
+        "exceptions": [
+          "DrawerContentScrollView",
+          "DrawerItemList",
+          "DrawerContent"
+        ]
       }
     ]
   }
