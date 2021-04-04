@@ -63,7 +63,7 @@ const DrawerRoutes = () => (
       name='Meals'
       component={MealsStack}
       options={{
-        title: 'Last Meals',
+        title: 'Last meals',
         drawerIcon: ({ size, focused }) => (
           <MaterialCommunityIcons
             name='bowl-mix'
