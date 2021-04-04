@@ -14,8 +14,8 @@ const styles = StyleSheet.create({
     marginVertical: 15,
   },
   profileImg: {
-    width: 150,
-    height: 150,
+    width: 120,
+    height: 120,
     borderRadius: 100,
     marginBottom: 15,
   },
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ({ drawerMode }) => {
+export default function Avatar({ drawerMode }) {
   if (drawerMode) {
     return (
       <TouchableOpacity style={styles.profileDrawer}>
@@ -53,4 +53,4 @@ export default ({ drawerMode }) => {
       <Text style={styles.profileName}>Peter Giromagny</Text>
     </View>
   );
-};
+}
