@@ -2,10 +2,10 @@ import * as React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import Home from '../Containers/Home';
-import Recipes from '../Containers/Recipes';
-import Meals from '../Containers/Meals';
-import Settings from '../Containers/Settings';
+import Home from '../Containers/HomeScreen';
+import Recipes from '../Containers/RecipesScreen';
+import Meals from '../Containers/MealsScreen';
+import Settings from '../Containers/SettingsScreen';
 import colors from '../Constants/colors';
 import Hamburger from '../Components/Hamburger';
 
