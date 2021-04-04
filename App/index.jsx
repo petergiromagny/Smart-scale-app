@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View, ActivityIndicator, Platform } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  ActivityIndicator,
+  Platform,
+  StatusBar,
+} from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import * as Font from 'expo-font';
 
@@ -67,7 +72,12 @@ export default class App extends Component {
 
     return (
       <SafeAreaProvider style={styles.container}>
-        <StatusBar style={this.barColor} backgroundColor='#506257' />
+        <StatusBar
+          barStyle={
+            Platform.OS === 'android' ? 'light-content' : 'dark-content'
+          }
+          translucent
+        />
         <Drawer />
       </SafeAreaProvider>
     );
