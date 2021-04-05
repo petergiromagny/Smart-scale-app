@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 
 import ProfileImg from '../Assets/Images/Memoji.png';
+import colors from '../Constants/colors';
 
 const styles = StyleSheet.create({
   profile: {
@@ -28,11 +29,13 @@ const styles = StyleSheet.create({
   profileName: {
     fontFamily: 'PoppinsBold',
     fontSize: 25,
+    color: colors.dark,
     textAlign: 'center',
   },
   profileNameDrawer: {
     fontFamily: 'PoppinsBold',
     fontSize: 15,
+    color: colors.dark,
     textAlign: 'center',
   },
 });
