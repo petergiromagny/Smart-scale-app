@@ -6,13 +6,12 @@ const styles = StyleSheet.create({
   textContainer: {},
   text: {
     fontFamily: 'PoppinsMedium',
+    textAlign: 'center',
   },
 });
 
 export default function Donut(props) {
-  const { kcal, objKcal, color } = props;
-  const radius = 45;
-  const strokeWidth = 10;
+  const { kcal, objKcal, color, radius, strokeWidth } = props;
   const circumference = 2 * Math.PI * radius;
   const halfCircle = radius + strokeWidth;
   const maxKcal = (100 * kcal) / objKcal;
@@ -62,7 +61,7 @@ export default function Donut(props) {
           StyleSheet.absoluteFillObject,
           {
             top: radius - radius / 2.8,
-            left: 40,
+            left: halfCircle - radius - strokeWidth,
             ...Platform.select({
               ios: {
                 transform: [{ translateY: 5 }],

@@ -91,7 +91,13 @@ export default function MealItem({ dataItem, navigation }) {
       style={styles.itemContainer}
       onPress={() => navigation.navigate('MealDetail', { item, OBJ_KCAL })}
     >
-      <Donut kcal={item.kcal} objKcal={OBJ_KCAL} color={colors.orange} />
+      <Donut
+        kcal={item.kcal}
+        objKcal={OBJ_KCAL}
+        color={colors.orange}
+        radius={45}
+        strokeWidth={10}
+      />
 
       <View style={styles.infoMeal}>
         <View style={styles.infoTop}>
