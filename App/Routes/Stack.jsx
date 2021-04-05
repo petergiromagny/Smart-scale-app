@@ -1,16 +1,19 @@
 import * as React from 'react';
-import { TouchableOpacity } from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { Platform, TouchableOpacity } from 'react-native';
+import {
+  createStackNavigator,
+  TransitionPresets,
+} from '@react-navigation/stack';
 
 import Home from '../Containers/HomeScreen';
 import Recipes from '../Containers/RecipesScreen';
 import Meals from '../Containers/MealsScreen';
 import Settings from '../Containers/SettingsScreen';
-import colors from '../Constants/colors';
 import Hamburger from '../Components/Hamburger';
+import MealDetail from '../Components/MealDetail';
+import colors from '../Constants/colors';
 
 const headerOptions = ({ navigation }) => ({
-  headerMode: 'none',
   headerStyle: {
     backgroundColor: colors.background,
     shadowOpacity: 0,
@@ -24,34 +27,65 @@ const headerOptions = ({ navigation }) => ({
       <Hamburger />
     </TouchableOpacity>
   ),
+  gestureEnabled: true,
+  cardStyle: { backgroundColor: colors.background },
+  cardOverlayEnabled: true,
+  ...Platform.select({
+    ios: {
+      ...TransitionPresets.ModalPresentationIOS,
+    },
+    android: {
+      ...TransitionPresets.RevealFromBottomAndroid,
+    },
+  }),
 });
 
-const Stack = createStackNavigator();
+const HomeStackNavigator = createStackNavigator();
+const RecipesStackNavigator = createStackNavigator();
+const MealsStackNavigator = createStackNavigator();
+const SettingsStackNavigator = createStackNavigator();
 
 export const HomeStack = () => (
-  <Stack.Navigator screenOptions={headerOptions}>
-    <Stack.Screen name='Home' options={{ title: '' }} component={Home} />
-  </Stack.Navigator>
+  <HomeStackNavigator.Navigator screenOptions={headerOptions} mode='modal'>
+    <HomeStackNavigator.Screen
+      name='Home'
+      options={{ title: '' }}
+      component={Home}
+    />
+    <HomeStackNavigator.Screen
+      name='MealDetail'
+      options={{ title: '', headerShown: false }}
+      component={MealDetail}
+    />
+  </HomeStackNavigator.Navigator>
 );
 
 export const RecipesStack = () => (
-  <Stack.Navigator screenOptions={headerOptions}>
-    <Stack.Screen name='Recipes' options={{ title: '' }} component={Recipes} />
-  </Stack.Navigator>
+  <RecipesStackNavigator.Navigator screenOptions={headerOptions}>
+    <RecipesStackNavigator.Screen
+      name='Recipes'
+      options={{ title: '' }}
+      component={Recipes}
+    />
+  </RecipesStackNavigator.Navigator>
 );
 
 export const MealsStack = () => (
-  <Stack.Navigator screenOptions={headerOptions}>
-    <Stack.Screen name='Meals' options={{ title: '' }} component={Meals} />
-  </Stack.Navigator>
+  <MealsStackNavigator.Navigator screenOptions={headerOptions}>
+    <MealsStackNavigator.Screen
+      name='Meals'
+      options={{ title: '' }}
+      component={Meals}
+    />
+  </MealsStackNavigator.Navigator>
 );
 
 export const SettingsStack = () => (
-  <Stack.Navigator screenOptions={headerOptions}>
-    <Stack.Screen
+  <SettingsStackNavigator.Navigator screenOptions={headerOptions}>
+    <SettingsStackNavigator.Screen
       name='Settings'
       options={{ title: '' }}
       component={Settings}
     />
-  </Stack.Navigator>
+  </SettingsStackNavigator.Navigator>
 );
