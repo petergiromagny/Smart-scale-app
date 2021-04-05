@@ -1,11 +1,11 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, Platform } from 'react-native';
 import Svg, { Circle, G } from 'react-native-svg';
 
 const styles = StyleSheet.create({
+  textContainer: {},
   text: {
     fontFamily: 'PoppinsMedium',
-    textAlign: 'center',
   },
 });
 
@@ -44,21 +44,7 @@ export default function Donut(props) {
             strokeDashoffset={strokeDashoffset}
             strokeDasharray={circumference}
           />
-          <View
-            style={{
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              top: '50%',
-            }}
-          >
-            <Text style={[{ fontSize: radius / 2.8, color }, styles.text]}>
-              {kcal}
-            </Text>
-            <Text style={[{ fontSize: radius / 2.8, color }, styles.text]}>
-              kcal
-            </Text>
-          </View>
+
           <Circle
             cx='50%'
             cy='50%'
@@ -71,6 +57,28 @@ export default function Donut(props) {
           />
         </G>
       </Svg>
+      <View
+        style={[
+          StyleSheet.absoluteFillObject,
+          {
+            top: radius - radius / 2.8,
+            left: 40,
+            ...Platform.select({
+              ios: {
+                transform: [{ translateY: 5 }],
+              },
+            }),
+          },
+          styles.textContainer,
+        ]}
+      >
+        <Text style={[{ fontSize: radius / 2.8, color }, styles.text]}>
+          {kcal}
+        </Text>
+        <Text style={[{ fontSize: radius / 2.8, color }, styles.text]}>
+          kcal
+        </Text>
+      </View>
     </View>
   );
 }

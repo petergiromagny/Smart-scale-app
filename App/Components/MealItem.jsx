@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     paddingVertical: 10,
     paddingHorizontal: 15,
-    width: width / 2,
+    width: width / 1.7,
     backgroundColor: colors.background,
     borderRadius: 10,
     shadowColor: colors.green,
@@ -42,26 +42,32 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   textNumber: {
-    fontSize: 20,
+    fontSize: 18,
     fontFamily: 'PoppinsBold',
     color: colors.green,
     textAlign: 'center',
   },
   infoMeal: {
+    flex: 1,
     flexDirection: 'column',
     width: '100%',
   },
   infoTop: {
+    flex: 2,
     flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'space-around',
+    paddingVertical: 15,
   },
   infoTopSection: {
     width: '50%',
-    marginVertical: 10,
+    paddingVertical: 10,
   },
   infoBottom: {
+    flex: 1,
     alignItems: 'center',
-    marginVertical: 10,
+    justifyContent: 'center',
+    marginVertical: 20,
   },
   separatorVertical: {
     width: 1,
@@ -99,7 +105,7 @@ export default function MealItem({ dataItem }) {
         <View style={styles.separatorHorizontal} />
         <View style={styles.infoBottom}>
           <Text style={styles.textNumber}>{item.protein}</Text>
-          <Text style={styles.text}>Protein</Text>
+          <Text style={styles.text}>Proteins</Text>
         </View>
       </View>
     </TouchableOpacity>
