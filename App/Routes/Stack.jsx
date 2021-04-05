@@ -10,7 +10,7 @@ import Recipes from '../Containers/RecipesScreen';
 import Meals from '../Containers/MealsScreen';
 import Settings from '../Containers/SettingsScreen';
 import Hamburger from '../Components/Hamburger';
-import MealDetail from '../Components/MealDetail';
+import MealDetailScreen from '../Containers/MealDetailScreen';
 import colors from '../Constants/colors';
 
 const headerOptions = ({ navigation }) => ({
@@ -55,7 +55,7 @@ export const HomeStack = () => (
     <HomeStackNavigator.Screen
       name='MealDetail'
       options={{ title: '', headerShown: false }}
-      component={MealDetail}
+      component={MealDetailScreen}
     />
   </HomeStackNavigator.Navigator>
 );
