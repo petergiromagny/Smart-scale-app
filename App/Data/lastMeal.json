@@ -1,32 +1,47 @@
 [
   {
     "id": 1,
-    "date": "10 March 2021",
+    "date": "10/03/2021",
     "time": "12:00",
-    "kcal": "568"
+    "kcal": "568",
+    "fat": 159,
+    "carbs": 76,
+    "protein": 200
   },
   {
     "id": 2,
-    "date": "12 March 2021",
+    "date": "12/03/2021",
     "time": "12:00",
-    "kcal": "1533"
+    "kcal": "1533",
+    "fat": 60,
+    "carbs": 176,
+    "protein": 20
   },
   {
     "id": 3,
-    "date": "14 March 2021",
+    "date": "14/03/2021",
     "time": "12:00",
-    "kcal": "782"
+    "kcal": "782",
+    "fat": 201,
+    "carbs": 129,
+    "protein": 56
   },
   {
     "id": 4,
-    "date": "16 March 2021",
+    "date": "16/03/2021",
     "time": "12:00",
-    "kcal": "675"
+    "kcal": "675",
+    "fat": 340,
+    "carbs": 128,
+    "protein": 35
   },
   {
     "id": 5,
-    "date": "18 March 2021",
+    "date": "18/03/2021",
     "time": "12:00",
-    "kcal": "930"
+    "kcal": "930",
+    "fat": 132,
+    "carbs": 345,
+    "protein": 321
   }
 ]
