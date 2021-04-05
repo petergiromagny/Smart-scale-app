@@ -19,10 +19,12 @@ const styles = StyleSheet.create({
  * @todo: Create animation on hamburger (wave)
  */
 
-export default () => (
-  <>
-    <View style={[styles.line, styles.top]} />
-    <View style={[styles.line, styles.middle]} />
-    <View style={[styles.line, styles.bottom]} />
-  </>
-);
+export default function Hamburger() {
+  return (
+    <>
+      <View style={[styles.line, styles.top]} />
+      <View style={[styles.line, styles.middle]} />
+      <View style={[styles.line, styles.bottom]} />
+    </>
+  );
+}
