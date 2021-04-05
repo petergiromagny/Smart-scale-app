@@ -14,6 +14,9 @@
   "plugins": ["react"],
   "rules": {
     "linebreak-style": ["error", "windows"],
+    "implicit-arrow-linebreak": ["error", "below"],
+    "comma-dangle": ["error", "only-multiline"],
+    "operator-linebreak": ["error", "after", { "overrides": { "=": "after" } }],
     "object-curly-newline": [
       "error",
       {
