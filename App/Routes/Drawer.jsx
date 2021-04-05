@@ -43,6 +43,7 @@ const DrawerRoutes = () => (
             color={focused ? colors.dark : colors.green}
           />
         ),
+        swipeEnabled: false,
       }}
     />
     <Drawer.Screen
