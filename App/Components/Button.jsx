@@ -20,12 +20,9 @@ const styles = StyleSheet.create({
 });
 
 export default function Button(props) {
-  const { title } = props;
+  const { title, actionPress } = props;
   return (
-    <TouchableOpacity
-      style={styles.buttonContainer}
-      onPress={() => console.log('TODO: Props action')}
-    >
+    <TouchableOpacity style={styles.buttonContainer} onPress={actionPress}>
       <Text style={styles.text}>{title}</Text>
     </TouchableOpacity>
   );

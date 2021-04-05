@@ -33,19 +33,21 @@ const styles = StyleSheet.create({
 });
 
 export default function MealList(props) {
-  const { horizontalView } = props;
+  const { horizontalView, navigation } = props;
   return (
     <View style={styles.container}>
       <FlatList
         data={mealData}
-        renderItem={(item) => <MealItem dataItem={item} />}
+        renderItem={(item) => (
+          <MealItem dataItem={item} navigation={navigation} />
+        )}
         keyExtractor={(item) => item.id.toString()}
         horizontal={horizontalView}
         showsHorizontalScrollIndicator={false}
         ListFooterComponent={() => (
           <TouchableOpacity
             style={styles.footerComponent}
-            onPress={() => console.log('TODO: Navigate to Last meals screen')}
+            onPress={() => navigation.navigate('Meals')}
           >
             <MaterialCommunityIcons
               name='arrow-right-bold-circle'

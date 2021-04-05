@@ -25,11 +25,15 @@ export default class Home extends Component {
   }
 
   render() {
+    const { navigation } = this.props;
     return (
       <SafeAreaView style={styles.container}>
         <Avatar />
-        <MealList horizontalView />
-        <Button title='See all recipes' />
+        <MealList horizontalView navigation={navigation} />
+        <Button
+          title='See recipes'
+          actionPress={() => navigation.navigate('Recipes')}
+        />
       </SafeAreaView>
     );
   }

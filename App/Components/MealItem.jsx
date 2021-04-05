@@ -83,11 +83,14 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function MealItem({ dataItem }) {
+export default function MealItem({ dataItem, navigation }) {
   const { item } = dataItem;
 
   return (
-    <TouchableOpacity style={styles.itemContainer}>
+    <TouchableOpacity
+      style={styles.itemContainer}
+      onPress={() => navigation.navigate('MealDetail', { item, OBJ_KCAL })}
+    >
       <Donut kcal={item.kcal} objKcal={OBJ_KCAL} color={colors.orange} />
 
       <View style={styles.infoMeal}>
