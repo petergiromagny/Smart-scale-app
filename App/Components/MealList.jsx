@@ -1,16 +1,34 @@
 import React from 'react';
-import { StyleSheet, View, FlatList, Button } from 'react-native';
-import colors from '../Constants/colors';
+import {
+  StyleSheet,
+  View,
+  FlatList,
+  TouchableOpacity,
+  Dimensions,
+} from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
+import colors from '../Constants/colors';
 import mealData from '../Data/lastMeal.json';
 import MealItem from './MealItem';
 
+const { width } = Dimensions.get('screen');
+
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 2,
   },
-  button: {
+  footerComponent: {
+    flex: 1,
     marginHorizontal: 10,
+    marginVertical: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    width: width / 5,
+    backgroundColor: colors.green,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
@@ -23,6 +41,19 @@ export default function MealList(props) {
         renderItem={(item) => <MealItem dataItem={item} />}
         keyExtractor={(item) => item.id.toString()}
         horizontal={horizontalView}
+        showsHorizontalScrollIndicator={false}
+        ListFooterComponent={() => (
+          <TouchableOpacity
+            style={styles.footerComponent}
+            onPress={() => console.log('TODO: Navigate to Last meals screen')}
+          >
+            <MaterialCommunityIcons
+              name='arrow-right-bold-circle'
+              size={40}
+              color={colors.background}
+            />
+          </TouchableOpacity>
+        )}
       />
     </View>
   );
