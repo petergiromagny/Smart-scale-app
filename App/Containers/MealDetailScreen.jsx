@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
     fontFamily: 'PoppinsMedium',
     fontSize: 17,
     marginLeft: 15,
+    color: colors.green,
   },
   nutritionSeparator: {
     width: '100%',
