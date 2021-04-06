@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import RecipeList from '../Components/RecipeList';
 import colors from '../Constants/colors';
 
 const styles = StyleSheet.create({
@@ -23,7 +24,7 @@ export default class Recipes extends Component {
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <Text> This is the Recipes Page </Text>
+        <RecipeList />
       </SafeAreaView>
     );
   }
