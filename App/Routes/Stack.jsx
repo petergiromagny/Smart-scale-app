@@ -11,6 +11,8 @@ import Meals from '../Containers/MealsScreen';
 import Settings from '../Containers/SettingsScreen';
 import Hamburger from '../Components/Hamburger';
 import MealDetailScreen from '../Containers/MealDetailScreen';
+import RecipeDetailScreen from '../Containers/RecipeDetailScreen';
+import BackButton from '../Components/BackButton';
 import colors from '../Constants/colors';
 
 const headerOptions = ({ navigation }) => ({
@@ -60,12 +62,20 @@ export const HomeStack = () => (
   </HomeStackNavigator.Navigator>
 );
 
-export const RecipesStack = () => (
+export const RecipesStack = ({ navigation }) => (
   <RecipesStackNavigator.Navigator screenOptions={headerOptions}>
     <RecipesStackNavigator.Screen
       name='Recipes'
       options={{ title: '' }}
       component={Recipes}
+    />
+    <RecipesStackNavigator.Screen
+      name='RecipeDetail'
+      options={{
+        title: '',
+        headerLeft: () => <BackButton navigation={navigation} />,
+      }}
+      component={RecipeDetailScreen}
     />
   </RecipesStackNavigator.Navigator>
 );

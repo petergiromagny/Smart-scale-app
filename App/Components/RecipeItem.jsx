@@ -68,10 +68,13 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function RecipeItem({ data }) {
+export default function RecipeItem({ data, navigation }) {
   const { item } = data;
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => navigation.navigate('RecipeDetail', { item })}
+    >
       <View style={styles.leftSide}>
         <Image source={imageTest} style={styles.image} />
 

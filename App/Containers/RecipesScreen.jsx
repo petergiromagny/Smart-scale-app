@@ -22,9 +22,10 @@ export default class Recipes extends Component {
   }
 
   render() {
+    const { navigation } = this.props;
     return (
       <SafeAreaView style={styles.container}>
-        <RecipeList />
+        <RecipeList navigation={navigation} />
       </SafeAreaView>
     );
   }
