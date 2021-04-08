@@ -33,7 +33,8 @@
         "exceptions": [
           "DrawerContentScrollView",
           "DrawerItemList",
-          "DrawerContent"
+          "DrawerContent",
+          "HeaderBackButton"
         ]
       }
     ]
