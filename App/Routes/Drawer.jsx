@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import {
   Entypo,
@@ -43,7 +42,6 @@ const DrawerRoutes = () => (
             color={focused ? colors.dark : colors.green}
           />
         ),
-        swipeEnabled: false,
       }}
     />
     <Drawer.Screen
@@ -91,8 +89,4 @@ const DrawerRoutes = () => (
   </Drawer.Navigator>
 );
 
-export default () => (
-  <NavigationContainer>
-    <DrawerRoutes />
-  </NavigationContainer>
-);
+export default DrawerRoutes;

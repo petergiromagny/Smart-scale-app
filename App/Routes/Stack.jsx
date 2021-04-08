@@ -1,17 +1,16 @@
 import * as React from 'react';
-import { Platform, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import {
   createStackNavigator,
-  TransitionPresets,
+  HeaderBackButton,
 } from '@react-navigation/stack';
 
 import Home from '../Containers/HomeScreen';
 import Recipes from '../Containers/RecipesScreen';
 import Meals from '../Containers/MealsScreen';
 import Settings from '../Containers/SettingsScreen';
-import Hamburger from '../Components/Hamburger';
-import MealDetailScreen from '../Containers/MealDetailScreen';
 import RecipeDetailScreen from '../Containers/RecipeDetailScreen';
+import Hamburger from '../Components/Hamburger';
 import BackButton from '../Components/BackButton';
 import colors from '../Constants/colors';
 
@@ -21,6 +20,7 @@ const headerOptions = ({ navigation }) => ({
     shadowOpacity: 0,
     elevation: 0,
   },
+  cardStyle: { backgroundColor: colors.background },
   headerLeftContainerStyle: { marginLeft: 20 },
   headerTintColor: colors.orange,
   headerTitleAlign: 'center',
@@ -29,17 +29,6 @@ const headerOptions = ({ navigation }) => ({
       <Hamburger />
     </TouchableOpacity>
   ),
-  gestureEnabled: true,
-  cardStyle: { backgroundColor: colors.background },
-  cardOverlayEnabled: true,
-  ...Platform.select({
-    ios: {
-      ...TransitionPresets.ModalPresentationIOS,
-    },
-    android: {
-      ...TransitionPresets.RevealFromBottomAndroid,
-    },
-  }),
 });
 
 const HomeStackNavigator = createStackNavigator();
@@ -48,21 +37,16 @@ const MealsStackNavigator = createStackNavigator();
 const SettingsStackNavigator = createStackNavigator();
 
 export const HomeStack = () => (
-  <HomeStackNavigator.Navigator screenOptions={headerOptions} mode='modal'>
+  <HomeStackNavigator.Navigator screenOptions={headerOptions}>
     <HomeStackNavigator.Screen
       name='Home'
       options={{ title: '' }}
       component={Home}
     />
-    <HomeStackNavigator.Screen
-      name='MealDetail'
-      options={{ title: '', headerShown: false }}
-      component={MealDetailScreen}
-    />
   </HomeStackNavigator.Navigator>
 );
 
-export const RecipesStack = ({ navigation }) => (
+export const RecipesStack = () => (
   <RecipesStackNavigator.Navigator screenOptions={headerOptions}>
     <RecipesStackNavigator.Screen
       name='Recipes'
@@ -71,10 +55,15 @@ export const RecipesStack = ({ navigation }) => (
     />
     <RecipesStackNavigator.Screen
       name='RecipeDetail'
-      options={{
+      options={({ navigation }) => ({
         title: '',
-        headerLeft: () => <BackButton navigation={navigation} />,
-      }}
+        headerTruncatedBackTitle: '',
+        headerBackImage: () => <BackButton navigation={navigation} />,
+        headerLeft: (props) => (
+          <HeaderBackButton {...props} style={{ marginHorizontal: 0 }} />
+        ),
+        gestureEnabled: true,
+      })}
       component={RecipeDetailScreen}
     />
   </RecipesStackNavigator.Navigator>

@@ -22,7 +22,7 @@ import PopBold from './Assets/Font/Poppins-Bold.ttf';
  * @import Components
  */
 import colors from './Constants/colors';
-import Drawer from './Routes/Drawer';
+import Main from './Routes/Main';
 
 const styles = StyleSheet.create({
   container: {
@@ -78,7 +78,7 @@ export default class App extends Component {
           }
           translucent
         />
-        <Drawer />
+        <Main />
       </SafeAreaProvider>
     );
   }
