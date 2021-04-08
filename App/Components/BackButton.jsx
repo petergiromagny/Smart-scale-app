@@ -1,14 +1,31 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
-import { SimpleLineIcons } from '@expo/vector-icons';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import colors from '../Constants/colors';
 
 const styles = StyleSheet.create({
   container: {
-    opacity: 0.5,
+    width: 20,
+    position: 'relative',
+  },
+  arrowLeftTop: {
+    position: 'absolute',
+    top: 0,
+    left: '50%',
+    width: '100%',
+    height: 4,
+    backgroundColor: colors.dark,
     borderRadius: 50,
-    padding: 8,
-    backgroundColor: colors.green,
+    transform: [{ rotate: '45deg' }, { translateY: 6 }],
+  },
+  arrowLeftBottom: {
+    position: 'absolute',
+    bottom: 0,
+    left: '50%',
+    width: '100%',
+    height: 4,
+    backgroundColor: colors.dark,
+    borderRadius: 50,
+    transform: [{ rotate: '-45deg' }, { translateY: -6 }],
   },
 });
 
@@ -18,7 +35,8 @@ export default function BackButton({ navigation }) {
       style={styles.container}
       onPress={() => navigation.goBack()}
     >
-      <SimpleLineIcons name='arrow-left' size={20} color='black' />
+      <View style={styles.arrowLeftTop} />
+      <View style={styles.arrowLeftBottom} />
     </TouchableOpacity>
   );
 }
