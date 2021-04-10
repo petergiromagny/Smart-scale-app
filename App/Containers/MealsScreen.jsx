@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { Text, StyleSheet, View } from 'react-native';
 
 import colors from '../Constants/colors';
 
@@ -22,9 +21,9 @@ export default class Meals extends Component {
 
   render() {
     return (
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         <Text> This is the Meals Page </Text>
-      </SafeAreaView>
+      </View>
     );
   }
 }

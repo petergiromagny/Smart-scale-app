@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { StyleSheet, View } from 'react-native';
 
 import RecipeList from '../Components/RecipeList';
 import colors from '../Constants/colors';
@@ -24,9 +23,9 @@ export default class Recipes extends Component {
   render() {
     const { navigation } = this.props;
     return (
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         <RecipeList navigation={navigation} />
-      </SafeAreaView>
+      </View>
     );
   }
 }
