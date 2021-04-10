@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Platform, Image, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import moment from 'moment';
 
 import colors from '../Constants/colors';
 import Donut from '../Components/Donut';
@@ -22,26 +23,38 @@ const styles = StyleSheet.create({
   dateTime: {
     textAlign: 'center',
     fontFamily: 'PoppinsMedium',
-    fontSize: 20,
-    marginVertical: 10,
-    color: colors.dark,
+    fontSize: 16,
+    ...Platform.select({ android: { marginVertical: 15 } }),
+    color: colors.green,
   },
-  nutritionInfo: {},
-  nutritionRow: {
+  nutritionInfo: {
     flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 20,
+    justifyContent: 'space-evenly',
+    backgroundColor: colors.background,
+    shadowColor: colors.green,
+    shadowOffset: { width: 0, height: 5 },
+    shadowRadius: 10,
+    shadowOpacity: 0.1,
+    elevation: 5,
+    borderRadius: 10,
+  },
+  nutritionRow: {
+    flexDirection: 'column',
     alignItems: 'center',
     marginVertical: 15,
   },
-  nutritionImage: { width: 35, height: 35 },
+  nutritionImage: { width: 25, height: 25, marginVertical: 5 },
   nutritionText: {
     fontFamily: 'PoppinsMedium',
     fontSize: 17,
-    marginLeft: 15,
+    marginVertical: 5,
     color: colors.green,
   },
   nutritionSeparator: {
-    width: '100%',
-    height: 1,
+    width: 1,
+    height: '75%',
     backgroundColor: colors.green,
     opacity: 0.1,
   },
@@ -59,6 +72,7 @@ export default class MealDetailScreen extends Component {
   render() {
     const { route } = this.props;
     const { item, OBJ_KCAL } = route.params;
+    const dateFormat = moment(item.date, 'DD/MM/YYYY').format('DD MMM YYYY');
 
     return (
       <SafeAreaView style={styles.container}>
@@ -75,24 +89,22 @@ export default class MealDetailScreen extends Component {
           <View style={styles.nutritionInfo}>
             <View style={styles.nutritionRow}>
               <Image source={fatsIcon} style={styles.nutritionImage} />
-              <Text style={styles.nutritionText}>{`Fats: ${item.fat}`}</Text>
+              <Text style={styles.nutritionText}>{item.fat}</Text>
             </View>
             <View style={styles.nutritionSeparator} />
             <View style={styles.nutritionRow}>
               <Image source={carbsIcon} style={styles.nutritionImage} />
-              <Text style={styles.nutritionText}>{`Carbs: ${item.carbs}`}</Text>
+              <Text style={styles.nutritionText}>{item.carbs}</Text>
             </View>
             <View style={styles.nutritionSeparator} />
             <View style={styles.nutritionRow}>
               <Image source={proteinsIcon} style={styles.nutritionImage} />
-              <Text style={styles.nutritionText}>
-                {`Proteins: ${item.protein}`}
-              </Text>
+              <Text style={styles.nutritionText}>{item.protein}</Text>
             </View>
           </View>
         </View>
         <View>
-          <Text style={styles.dateTime}>{`${item.date} - ${item.time}`}</Text>
+          <Text style={styles.dateTime}>{`${dateFormat}, ${item.time}`}</Text>
         </View>
       </SafeAreaView>
     );
