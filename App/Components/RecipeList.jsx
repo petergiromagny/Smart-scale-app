@@ -1,7 +1,7 @@
 import React from 'react';
 import { FlatList } from 'react-native';
 
-import recipeData from '../Data/recipes.json';
+import recipeData from '../Data/recipesAPI.json';
 import RecipeItem from './RecipeItem';
 
 export default function RecipeList(props) {
@@ -13,7 +13,7 @@ export default function RecipeList(props) {
         renderItem={(item) => (
           <RecipeItem data={item} navigation={navigation} />
         )}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item) => item.recipe.label}
       />
     </>
   );

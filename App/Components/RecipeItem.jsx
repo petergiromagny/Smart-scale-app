@@ -8,8 +8,7 @@ import {
   View,
 } from 'react-native';
 import { SimpleLineIcons } from '@expo/vector-icons';
-
-import imageTest from '../Assets/Images/bolo.jpg';
+import numeral from 'numeral';
 
 import colors from '../Constants/colors';
 
@@ -69,29 +68,31 @@ const styles = StyleSheet.create({
 });
 
 export default function RecipeItem({ data, navigation }) {
-  const { item } = data;
+  const { recipe } = data.item;
+  const caloriesFormat = numeral(recipe.calories).format('0');
+  const totalWeightFormat = numeral(recipe.totalWeight).format('0');
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => navigation.navigate('RecipeDetail', { item })}
+      onPress={() => navigation.navigate('RecipeDetail', { recipe })}
     >
       <View style={styles.leftSide}>
-        <Image source={imageTest} style={styles.image} />
+        <Image source={{ uri: recipe.image }} style={styles.image} />
 
         <View style={styles.leftSideText}>
-          <Text style={styles.recipeName}>{item.name}</Text>
+          <Text style={styles.recipeName}>{recipe.label}</Text>
           <Text
             style={[
               styles.recipeInfo,
               { ...Platform.select({ android: { marginTop: -8 } }) },
             ]}
           >
-            150g
+            {`${totalWeightFormat}g`}
           </Text>
         </View>
       </View>
       <View style={styles.rightSide}>
-        <Text style={styles.recipeInfo}>{`${item.calories} kcal`}</Text>
+        <Text style={styles.recipeInfo}>{`${caloriesFormat} kcal`}</Text>
         <SimpleLineIcons
           name='arrow-right'
           size={20}
