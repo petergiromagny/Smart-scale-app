@@ -13,9 +13,14 @@
   },
   "plugins": ["react"],
   "rules": {
+    "indent": ["error", 2],
     "linebreak-style": ["error", "windows"],
     "comma-dangle": ["error", "only-multiline"],
-    "operator-linebreak": ["error", "after", { "overrides": { "=": "after" } }],
+    "operator-linebreak": [
+      "error",
+      "before",
+      { "overrides": { "=": "after" } }
+    ],
     "object-curly-newline": [
       "error",
       {
