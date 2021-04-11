@@ -55,10 +55,11 @@ export const RecipesStack = () => (
     />
     <RecipesStackNavigator.Screen
       name='RecipeDetail'
-      options={({ navigation }) => ({
+      options={() => ({
         title: '',
+        headerTransparent: true,
         headerTruncatedBackTitle: '',
-        headerBackImage: () => <BackButton navigation={navigation} />,
+        headerBackImage: () => <BackButton />,
         headerLeft: (props) => (
           <HeaderBackButton {...props} style={{ marginHorizontal: 0 }} />
         ),
