@@ -15,7 +15,7 @@ const { width } = Dimensions.get('screen');
 const OBJ_KCAL = 1850;
 
 const styles = StyleSheet.create({
-  itemContainer: {
+  itemContainerHome: {
     marginHorizontal: 10,
     marginVertical: 20,
     paddingVertical: 10,
@@ -35,6 +35,25 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+  itemContainerMeal: {
+    marginHorizontal: 10,
+    marginVertical: 10,
+    paddingVertical: 5,
+    paddingHorizontal: 15,
+    backgroundColor: colors.background,
+    borderRadius: 10,
+    shadowColor: colors.green,
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowOpacity: 0.15,
+    shadowRadius: 10,
+    elevation: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
   text: {
     fontSize: 15,
     fontFamily: 'PoppinsRegular',
@@ -47,10 +66,16 @@ const styles = StyleSheet.create({
     color: colors.green,
     textAlign: 'center',
   },
+  infoMealHome: {
+    flex: 1,
+    flexDirection: 'column',
+    width: '100%',
+  },
   infoMeal: {
     flex: 1,
     flexDirection: 'column',
     width: '100%',
+    marginHorizontal: 20,
   },
   infoTop: {
     flex: 2,
@@ -83,23 +108,28 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function MealItem({ dataItem, navigation }) {
+export default function MealItem({ dataItem, navigation, mealScreen }) {
   const { item } = dataItem;
 
   return (
     <TouchableOpacity
-      style={styles.itemContainer}
-      onPress={() => navigation.navigate('MealDetail', { item, OBJ_KCAL })}
+      style={mealScreen ? styles.itemContainerMeal : styles.itemContainerHome}
+      onPress={() =>
+        navigation.navigate(mealScreen ? 'MealDetailScreen' : 'MealDetail', {
+          item,
+          OBJ_KCAL,
+        })
+      }
     >
       <Donut
         kcal={item.kcal}
         objKcal={OBJ_KCAL}
         color={colors.orange}
-        radius={45}
+        radius={mealScreen ? 50 : 45}
         strokeWidth={10}
       />
 
-      <View style={styles.infoMeal}>
+      <View style={mealScreen ? styles.infoMeal : styles.infoMealHome}>
         <View style={styles.infoTop}>
           <View style={styles.infoTopSection}>
             <Text style={styles.textNumber}>{item.fat}</Text>

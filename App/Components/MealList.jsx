@@ -34,6 +34,20 @@ const styles = StyleSheet.create({
 
 export default function MealList(props) {
   const { horizontalView, navigation } = props;
+
+  if (!horizontalView) {
+    return (
+      <FlatList
+        data={mealData}
+        renderItem={(item) => (
+          <MealItem dataItem={item} navigation={navigation} mealScreen />
+        )}
+        keyExtractor={(item) => item.id.toString()}
+        showsVerticalScrollIndicator={false}
+      />
+    );
+  }
+
   return (
     <View style={styles.container}>
       <FlatList

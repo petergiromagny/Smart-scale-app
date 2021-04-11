@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import RecipeList from '../Components/RecipeList';
 import colors from '../Constants/colors';
@@ -8,6 +9,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
+    marginTop: 50,
   },
 });
 
@@ -23,9 +25,9 @@ export default class Recipes extends Component {
   render() {
     const { navigation } = this.props;
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <RecipeList navigation={navigation} />
-      </View>
+      </SafeAreaView>
     );
   }
 }

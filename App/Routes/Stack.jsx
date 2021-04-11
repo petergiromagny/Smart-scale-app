@@ -3,11 +3,13 @@ import { TouchableOpacity } from 'react-native';
 import {
   createStackNavigator,
   HeaderBackButton,
+  TransitionPresets,
 } from '@react-navigation/stack';
 
 import Home from '../Containers/HomeScreen';
 import Recipes from '../Containers/RecipesScreen';
 import Meals from '../Containers/MealsScreen';
+import MealDetailScreen from '../Containers/MealDetailScreen';
 import Settings from '../Containers/SettingsScreen';
 import RecipeDetailScreen from '../Containers/RecipeDetailScreen';
 import Hamburger from '../Components/Hamburger';
@@ -18,6 +20,7 @@ const headerOptions = ({ navigation }) => ({
   headerStyle: {
     backgroundColor: colors.background,
     shadowOpacity: 0,
+    height: 80,
     elevation: 0,
   },
   cardStyle: { backgroundColor: colors.background },
@@ -50,7 +53,7 @@ export const RecipesStack = () => (
   <RecipesStackNavigator.Navigator screenOptions={headerOptions}>
     <RecipesStackNavigator.Screen
       name='Recipes'
-      options={{ title: '' }}
+      options={{ title: '', headerTransparent: true }}
       component={Recipes}
     />
     <RecipesStackNavigator.Screen
@@ -74,8 +77,23 @@ export const MealsStack = () => (
   <MealsStackNavigator.Navigator screenOptions={headerOptions}>
     <MealsStackNavigator.Screen
       name='Meals'
-      options={{ title: '' }}
+      options={{ title: '', headerTransparent: true }}
       component={Meals}
+    />
+    <MealsStackNavigator.Screen
+      name='MealDetailScreen'
+      options={() => ({
+        title: '',
+        headerTransparent: true,
+        headerTruncatedBackTitle: '',
+        headerBackImage: () => <BackButton />,
+        headerLeft: (props) => (
+          <HeaderBackButton {...props} style={{ marginHorizontal: 0 }} />
+        ),
+        gestureEnabled: true,
+        ...TransitionPresets.DefaultTransition,
+      })}
+      component={MealDetailScreen}
     />
   </MealsStackNavigator.Navigator>
 );
