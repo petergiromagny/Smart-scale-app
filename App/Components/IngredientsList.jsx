@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Platform,
-  FlatList,
-  Image,
-} from 'react-native';
+import { StyleSheet, Text, View, Platform, Image } from 'react-native';
 import colors from '../Constants/colors';
 
 const styles = StyleSheet.create({
@@ -28,9 +21,7 @@ const styles = StyleSheet.create({
   ingredientListContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-  },
-  ingredientSeparator: {
-    marginVertical: 5,
+    marginBottom: 10,
   },
 });
 
@@ -38,22 +29,19 @@ export default function IngredientsList({ ingredients }) {
   return (
     <View style={styles.ingredientsContainer}>
       <Text style={styles.title}>Ingredients</Text>
-      <FlatList
-        data={ingredients}
-        renderItem={(item) => (
-          <View style={styles.ingredientListContainer}>
-            <Image
-              source={{ uri: item.item.image }}
-              style={styles.ingredientImage}
-            />
-            <Text style={styles.ingredientName}>{item.item.text}</Text>
-          </View>
-        )}
-        keyExtractor={(item) => item.foodId}
-        ItemSeparatorComponent={() => (
-          <View style={styles.ingredientSeparator} />
-        )}
-      />
+      {ingredients.map((ingredient) => (
+        <View style={styles.ingredientListContainer} key={ingredient.foodId}>
+          <Image
+            source={{
+              uri: ingredient.image,
+            }}
+            style={styles.ingredientImage}
+          />
+          <Text style={styles.ingredientName}>
+            {ingredient.text.charAt(0).toUpperCase() + ingredient.text.slice(1)}
+          </Text>
+        </View>
+      ))}
     </View>
   );
 }
