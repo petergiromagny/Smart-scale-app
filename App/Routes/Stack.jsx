@@ -7,11 +7,13 @@ import {
 } from '@react-navigation/stack';
 
 import Home from '../Containers/HomeScreen';
-import Recipes from '../Containers/RecipesScreen';
 import Meals from '../Containers/MealsScreen';
 import MealDetailScreen from '../Containers/MealDetailScreen';
-import Settings from '../Containers/SettingsScreen';
+import Recipes from '../Containers/RecipesScreen';
 import RecipeDetailScreen from '../Containers/RecipeDetailScreen';
+import Settings from '../Containers/SettingsScreen';
+import SettingDetailScreen from '../Containers/SettingDetailScreen';
+
 import Hamburger from '../Components/Hamburger';
 import BackButton from '../Components/BackButton';
 import colors from '../Constants/colors';
@@ -104,6 +106,21 @@ export const SettingsStack = () => (
       name='Settings'
       options={{ title: '' }}
       component={Settings}
+    />
+    <SettingsStackNavigator.Screen
+      name='SettingDetailScreen'
+      options={() => ({
+        title: '',
+        headerTransparent: true,
+        headerTruncatedBackTitle: '',
+        headerBackImage: () => <BackButton />,
+        headerLeft: (props) => (
+          <HeaderBackButton {...props} style={{ marginHorizontal: 0 }} />
+        ),
+        gestureEnabled: true,
+        ...TransitionPresets.DefaultTransition,
+      })}
+      component={SettingDetailScreen}
     />
   </SettingsStackNavigator.Navigator>
 );
