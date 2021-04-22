@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, ScrollView } from 'react-native';
+import { StyleSheet, ScrollView, Platform } from 'react-native';
 import SettingsContent from '../Components/SettingsContent';
 
 import settingsIcon from '../Assets/Images/settingsWIcon.png';
@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
     marginHorizontal: 10,
     paddingBottom: 30,
+    ...(Platform.OS === 'ios' ? { marginTop: 15 } : {}),
   },
 });
 

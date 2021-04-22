@@ -37,12 +37,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   button: {
-    shadowColor: colors.dark,
+    shadowColor: colors.green,
     shadowOffset: {
       width: 0,
       height: 0,
     },
-    shadowOpacity: 0.01,
+    shadowOpacity: 0.2,
     borderRadius: 10,
     width: '48%',
     paddingVertical: 5,
