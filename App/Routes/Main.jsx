@@ -7,6 +7,7 @@ import {
 } from '@react-navigation/stack';
 
 import MealDetailScreen from '../Containers/MealDetailScreen';
+import SettingDetailScreen from '../Containers/SettingDetailScreen';
 import DrawerRoutes from './Drawer';
 import colors from '../Constants/colors';
 
@@ -42,6 +43,10 @@ const MainStack = () => (
       <MainStackNavigator.Screen
         name='MealDetail'
         component={MealDetailScreen}
+      />
+      <MainStackNavigator.Screen
+        name='SettingDetailScreen'
+        component={SettingDetailScreen}
       />
     </MainStackNavigator.Navigator>
   </NavigationContainer>
