@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
+import parsePhoneNumberFromString from 'libphonenumber-js/mobile';
 
 import colors from '../Constants/colors';
 
@@ -37,8 +38,23 @@ export default function SettingItem({
   dataLabel,
   dataInput,
   dataType,
+  maxNumber,
   navigation,
 }) {
+  const [dataUpdate, setDataUpdate] = useState(dataInput);
+
+  const formatMobileNumber = (text) => {
+    const phoneNumber = parsePhoneNumberFromString(text, 'FR');
+    return phoneNumber.formatNational();
+  };
+
+  useEffect(() => {
+    if (dataLabel.toLowerCase() === 'phone') {
+      const phoneText = formatMobileNumber(dataUpdate);
+      setDataUpdate(phoneText);
+    }
+  });
+
   return (
     <TouchableOpacity
       style={styles.itemContainer}
@@ -47,12 +63,13 @@ export default function SettingItem({
           dataInput,
           dataLabel,
           dataType,
+          maxNumber,
         })
       }
     >
       <View style={styles.dataContainer}>
         <Text style={styles.dataLabel}>{dataLabel}</Text>
-        <Text style={styles.dataInput}>{dataInput}</Text>
+        <Text style={styles.dataInput}>{dataUpdate}</Text>
       </View>
       <View style={styles.svgContainer}>
         <Svg width='100%' height='100%' viewBox='0 0 100 100'>

@@ -49,7 +49,8 @@ export default class Settings extends Component {
           />
           <SettingItem
             dataLabel='Phone'
-            dataInput='06 82 05 60 52'
+            dataInput='0682056052'
+            maxNumber={14}
             dataType='phone-pad'
             navigation={navigation}
           />
@@ -62,6 +63,7 @@ export default class Settings extends Component {
           <SettingItem
             dataLabel='Calories'
             dataInput='1580'
+            maxNumber={4}
             dataType='number-pad'
             navigation={navigation}
           />
