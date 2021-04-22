@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 
-import Avatar from '../Components/Avatar';
-import Button from '../Components/Button';
 import MealList from '../Components/MealList';
+import RecipeList from '../Components/RecipeList';
 import colors from '../Constants/colors';
 
 const styles = StyleSheet.create({
@@ -12,7 +11,11 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
     paddingBottom: 20,
   },
-  text: { fontFamily: 'PoppinsMedium' },
+  homeHeader: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  text: { fontFamily: 'PoppinsBold', textAlign: 'center', fontSize: 30 },
 });
 
 export default class Home extends Component {
@@ -27,12 +30,15 @@ export default class Home extends Component {
     const { navigation } = this.props;
     return (
       <View style={styles.container}>
-        <Avatar />
+        <View style={styles.homeHeader}>
+          <Text style={styles.text}>Smart Scale</Text>
+        </View>
         <MealList horizontalView navigation={navigation} />
-        <Button
+        <RecipeList horizontalView navigation={navigation} />
+        {/*         <Button
           title='See recipes'
           actionPress={() => navigation.navigate('Recipes')}
-        />
+        /> */}
       </View>
     );
   }

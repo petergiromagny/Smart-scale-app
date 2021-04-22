@@ -13,11 +13,12 @@ import Recipes from '../Containers/RecipesScreen';
 import RecipeDetailScreen from '../Containers/RecipeDetailScreen';
 import Settings from '../Containers/SettingsScreen';
 
+import Avatar from '../Components/Avatar';
 import Hamburger from '../Components/Hamburger';
 import BackButton from '../Components/BackButton';
 import colors from '../Constants/colors';
 
-const headerOptions = ({ navigation }) => ({
+const headerOptions = ({ navigation, route }) => ({
   headerStyle: {
     backgroundColor: colors.background,
     shadowOpacity: 0,
@@ -28,6 +29,13 @@ const headerOptions = ({ navigation }) => ({
   headerLeftContainerStyle: { marginLeft: 20 },
   headerTintColor: colors.orange,
   headerTitleAlign: 'center',
+  headerRight: () => {
+    if (route.name.toLowerCase() === 'home') {
+      return <Avatar navigation={navigation} />;
+    }
+    return null;
+  },
+  headerRightContainerStyle: { marginRight: 20 },
   headerLeft: () => (
     <TouchableOpacity onPress={navigation.openDrawer}>
       <Hamburger />
@@ -46,6 +54,20 @@ export const HomeStack = () => (
       name='Home'
       options={{ title: '' }}
       component={Home}
+    />
+    <RecipesStackNavigator.Screen
+      name='RecipeDetailHome'
+      options={() => ({
+        title: '',
+        headerTransparent: true,
+        headerTruncatedBackTitle: '',
+        headerBackImage: () => <BackButton />,
+        headerLeft: (props) => (
+          <HeaderBackButton {...props} style={{ marginHorizontal: 0 }} />
+        ),
+        gestureEnabled: true,
+      })}
+      component={RecipeDetailScreen}
     />
   </HomeStackNavigator.Navigator>
 );

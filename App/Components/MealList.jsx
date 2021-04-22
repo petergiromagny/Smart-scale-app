@@ -4,31 +4,36 @@ import {
   View,
   FlatList,
   TouchableOpacity,
-  Dimensions,
+  Text,
 } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import colors from '../Constants/colors';
 import mealData from '../Data/lastMeal.json';
 import MealItem from './MealItem';
 
-const { width } = Dimensions.get('screen');
-
 const styles = StyleSheet.create({
   container: {
-    flex: 2,
+    flex: 3,
   },
-  footerComponent: {
-    flex: 1,
-    marginHorizontal: 10,
-    marginVertical: 20,
-    paddingVertical: 10,
-    paddingHorizontal: 15,
-    width: width / 5,
-    backgroundColor: colors.green,
-    borderRadius: 10,
-    justifyContent: 'center',
+  headerList: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
+    marginHorizontal: 10,
+  },
+  headerTitle: {
+    fontFamily: 'PoppinsMedium',
+    fontSize: 17,
+  },
+  buttonAll: {
+    paddingVertical: 5,
+    paddingHorizontal: 15,
+    borderRadius: 10,
+    backgroundColor: colors.green,
+  },
+  textAll: {
+    fontFamily: 'PoppinsRegular',
+    color: colors.background,
   },
 });
 
@@ -50,6 +55,15 @@ export default function MealList(props) {
 
   return (
     <View style={styles.container}>
+      <View style={styles.headerList}>
+        <Text style={styles.headerTitle}>Last meals</Text>
+        <TouchableOpacity
+          style={styles.buttonAll}
+          onPress={() => navigation.navigate('Meals')}
+        >
+          <Text style={styles.textAll}>See all</Text>
+        </TouchableOpacity>
+      </View>
       <FlatList
         data={mealData}
         renderItem={(item) => (
@@ -58,18 +72,6 @@ export default function MealList(props) {
         keyExtractor={(item) => item.id.toString()}
         horizontal={horizontalView}
         showsHorizontalScrollIndicator={false}
-        ListFooterComponent={() => (
-          <TouchableOpacity
-            style={styles.footerComponent}
-            onPress={() => navigation.navigate('Meals')}
-          >
-            <MaterialCommunityIcons
-              name='arrow-right-bold-circle'
-              size={40}
-              color={colors.background}
-            />
-          </TouchableOpacity>
-        )}
       />
     </View>
   );

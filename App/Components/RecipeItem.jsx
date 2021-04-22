@@ -33,6 +33,16 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
     elevation: 5,
   },
+  containerHorizontal: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: colors.background,
+    marginVertical: 10,
+    marginHorizontal: 10,
+    borderRadius: 10,
+  },
   leftSide: {
     flex: 3,
     flexDirection: 'row',
@@ -49,6 +59,11 @@ const styles = StyleSheet.create({
     height: 60,
     borderRadius: 10,
     marginRight: 10,
+  },
+  imageHorizontal: {
+    width: 90,
+    height: 90,
+    borderRadius: 10,
   },
   arrowIcon: {
     marginLeft: 5,
@@ -67,10 +82,27 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function RecipeItem({ data, navigation }) {
+export default function RecipeItem({ data, navigation, horizontal }) {
   const { recipe } = data.item;
   const caloriesFormat = numeral(recipe.calories).format('0');
   const totalWeightFormat = numeral(recipe.totalWeight).format('0');
+
+  if (horizontal) {
+    return (
+      <TouchableOpacity
+        style={styles.containerHorizontal}
+        onPress={() => navigation.navigate('RecipeDetailHome', { recipe })}
+      >
+        <View>
+          <Image
+            source={{ uri: recipe.image }}
+            style={styles.imageHorizontal}
+          />
+        </View>
+      </TouchableOpacity>
+    );
+  }
+
   return (
     <TouchableOpacity
       style={styles.container}

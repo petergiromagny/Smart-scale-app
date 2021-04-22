@@ -15,9 +15,9 @@ const styles = StyleSheet.create({
     marginVertical: 15,
   },
   profileImg: {
-    width: 120,
-    height: 120,
-    borderRadius: 100,
+    width: 50,
+    height: 50,
+    borderRadius: 50,
     marginBottom: 15,
   },
   profileImgDrawer: {
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function Avatar({ drawerMode }) {
+export default function Avatar({ drawerMode, navigation }) {
   if (drawerMode) {
     return (
       <TouchableOpacity style={styles.profileDrawer}>
@@ -51,9 +51,10 @@ export default function Avatar({ drawerMode }) {
   }
 
   return (
-    <View style={styles.profile}>
-      <Image style={styles.profileImg} source={ProfileImg} />
-      <Text style={styles.profileName}>Peter Giromagny</Text>
-    </View>
+    <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
+      <View style={styles.profile}>
+        <Image style={styles.profileImg} source={ProfileImg} />
+      </View>
+    </TouchableOpacity>
   );
 }
