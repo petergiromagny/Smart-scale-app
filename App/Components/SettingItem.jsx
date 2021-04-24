@@ -40,6 +40,7 @@ export default function SettingItem({
   dataType,
   maxNumber,
   navigation,
+  favoriteType,
 }) {
   const [dataUpdate, setDataUpdate] = useState(dataInput);
 
@@ -64,6 +65,7 @@ export default function SettingItem({
           dataLabel,
           dataType,
           maxNumber,
+          favoriteType,
         })
       }
     >

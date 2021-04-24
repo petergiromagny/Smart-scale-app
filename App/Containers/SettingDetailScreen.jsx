@@ -12,6 +12,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import parsePhoneNumberFromString from 'libphonenumber-js/mobile';
 
 import colors from '../Constants/colors';
+import FavIngrList from '../Components/FavIngrList';
 
 const styles = StyleSheet.create({
   container: {
@@ -55,7 +56,13 @@ const styles = StyleSheet.create({
 });
 
 export default function SettingDetailScreen({ route, navigation }) {
-  const { dataLabel, dataInput, dataType, maxNumber } = route.params;
+  const {
+    dataLabel,
+    dataInput,
+    dataType,
+    maxNumber,
+    favoriteType,
+  } = route.params;
 
   const [dataUpdate, setDataUpdate] = useState(dataInput);
 
@@ -83,6 +90,14 @@ export default function SettingDetailScreen({ route, navigation }) {
       setDataUpdate(phoneText);
     }
   });
+
+  if (favoriteType) {
+    return (
+      <View>
+        <FavIngrList label={dataLabel} />
+      </View>
+    );
+  }
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
