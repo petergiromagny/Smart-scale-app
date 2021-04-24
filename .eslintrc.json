@@ -3,7 +3,7 @@
     "es2020": true,
     "node": true
   },
-  "extends": ["plugin:react/recommended", "airbnb"],
+  "extends": ["plugin:react/recommended", "airbnb", "prettier"],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -21,17 +21,20 @@
       "before",
       { "overrides": { "=": "after" } }
     ],
+    "brace-style": ["error", "1tbs"],
     "object-curly-newline": [
       "error",
       {
         "ObjectExpression": { "multiline": true, "consistent": true },
-        "ObjectPattern": "never",
+        "ObjectPattern": { "multiline": true, "consistent": true },
         "ImportDeclaration": { "multiline": true },
         "ExportDeclaration": "never"
       }
     ],
     "jsx-quotes": ["error", "prefer-single"],
     "react/prop-types": [0],
+    "arrow-body-style": ["error", "as-needed"],
+    "react/jsx-curly-newline": "off",
     "react/jsx-props-no-spreading": [
       2,
       {
