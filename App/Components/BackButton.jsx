@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Platform } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 import colors from '../Constants/colors';
 
@@ -13,7 +13,14 @@ const styles = StyleSheet.create({
     backgroundColor: colors.green,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 10,
+    ...Platform.select({
+      ios: {
+        marginTop: 40,
+      },
+      android: {
+        marginTop: 10,
+      },
+    }),
   },
 });
 

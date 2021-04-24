@@ -9,6 +9,7 @@ import Donut from '../Components/Donut';
 import fatsIcon from '../Assets/Images/fatsIcon.png';
 import carbsIcon from '../Assets/Images/carbsIcon.png';
 import proteinsIcon from '../Assets/Images/proteinsIcon.png';
+import CloseButton from '../Components/CloseButton';
 
 const styles = StyleSheet.create({
   container: {
@@ -70,13 +71,14 @@ export default class MealDetailScreen extends Component {
   }
 
   render() {
-    const { route } = this.props;
+    const { route, navigation } = this.props;
     const { item, OBJ_KCAL } = route.params;
     const dateFormat = moment(item.date, 'DD/MM/YYYY').format('DD MMM YYYY');
 
     return (
       <SafeAreaView style={styles.container}>
         <View>
+          <CloseButton navigation={navigation} />
           <View style={styles.donutContainer}>
             <Donut
               kcal={item.kcal}
