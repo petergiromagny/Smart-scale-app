@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
 });
 
 export default function FavIngrList({ label }) {
-  const [dataList, setDataList] = useState([]);
+  // const [dataList, setDataList] = useState([]);
 
   /* useEffect(() => {
     if (label.toLowerCase() === 'vegetable') {
@@ -26,8 +26,6 @@ export default function FavIngrList({ label }) {
       setDataList(meat);
     }
   }); */
-
-  console.log(dataList);
 
   return (
     <View style={styles.container}>
