@@ -46,11 +46,11 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     borderRadius: 10,
     width: '48%',
-    paddingVertical: 5,
+    paddingVertical: 10,
   },
   buttonText: {
     textAlign: 'center',
-    fontSize: 16,
+    fontSize: 18,
     fontFamily: 'PoppinsMedium',
   },
 });
@@ -93,9 +93,13 @@ export default function SettingDetailScreen({ route, navigation }) {
 
   if (favoriteType) {
     return (
-      <View>
-        <FavIngrList label={dataLabel} />
-      </View>
+      <>
+        <FavIngrList
+          label={dataLabel}
+          navigation={navigation}
+          updateDataSet={() => updateSetting()}
+        />
+      </>
     );
   }
 
