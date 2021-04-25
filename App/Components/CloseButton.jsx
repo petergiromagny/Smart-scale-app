@@ -13,7 +13,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.green,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 10,
   },
   cross: {
     width: 5,

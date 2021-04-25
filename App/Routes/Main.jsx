@@ -8,6 +8,7 @@ import {
 
 import MealDetailScreen from '../Containers/MealDetailScreen';
 import SettingDetailScreen from '../Containers/SettingDetailScreen';
+import CloseButton from '../Components/CloseButton';
 import DrawerRoutes from './Drawer';
 import colors from '../Constants/colors';
 
@@ -18,6 +19,7 @@ const headerOptions = () => ({
     backgroundColor: colors.background,
     shadowOpacity: 0,
     elevation: 0,
+    height: 50,
   },
   gestureEnabled: true,
   cardStyle: { backgroundColor: colors.background },
@@ -34,19 +36,27 @@ const headerOptions = () => ({
 
 const MainStack = () => (
   <NavigationContainer>
-    <MainStackNavigator.Navigator
-      mode='modal'
-      headerMode='none'
-      screenOptions={headerOptions}
-    >
-      <MainStackNavigator.Screen name='Drawer' component={DrawerRoutes} />
+    <MainStackNavigator.Navigator mode='modal' screenOptions={headerOptions}>
+      <MainStackNavigator.Screen
+        name='Drawer'
+        component={DrawerRoutes}
+        options={{ headerShown: false }}
+      />
       <MainStackNavigator.Screen
         name='MealDetail'
         component={MealDetailScreen}
+        options={({ navigation }) => ({
+          title: '',
+          headerLeft: () => <CloseButton navigation={navigation} />,
+          headerLeftContainerStyle: {
+            marginLeft: 20,
+          },
+        })}
       />
       <MainStackNavigator.Screen
         name='SettingDetailScreen'
         component={SettingDetailScreen}
+        options={{ headerShown: false }}
       />
     </MainStackNavigator.Navigator>
   </NavigationContainer>
