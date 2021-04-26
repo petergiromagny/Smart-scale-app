@@ -12,6 +12,8 @@ import MealDetailScreen from '../Containers/MealDetailScreen';
 import Recipes from '../Containers/RecipesScreen';
 import RecipeDetailScreen from '../Containers/RecipeDetailScreen';
 import Settings from '../Containers/SettingsScreen';
+import SignIn from '../Containers/SignInScreen';
+import SignUp from '../Containers/SignUpScreen';
 
 import Avatar from '../Components/Avatar';
 import Hamburger from '../Components/Hamburger';
@@ -47,6 +49,8 @@ const HomeStackNavigator = createStackNavigator();
 const RecipesStackNavigator = createStackNavigator();
 const MealsStackNavigator = createStackNavigator();
 const SettingsStackNavigator = createStackNavigator();
+const SignInStackNavigator = createStackNavigator();
+const SignUpStackNavigator = createStackNavigator();
 
 export const HomeStack = () => (
   <HomeStackNavigator.Navigator screenOptions={headerOptions}>
@@ -129,4 +133,24 @@ export const SettingsStack = () => (
       component={Settings}
     />
   </SettingsStackNavigator.Navigator>
+);
+
+export const SignInStack = () => (
+  <SignInStackNavigator.Navigator screenOptions={{ headerShown: false }}>
+    <SignInStackNavigator.Screen
+      name='SignIn'
+      options={{ title: '' }}
+      component={SignIn}
+    />
+  </SignInStackNavigator.Navigator>
+);
+
+export const SignUpStack = () => (
+  <SignUpStackNavigator.Navigator screenOptions={{ headerShown: false }}>
+    <SignUpStackNavigator.Screen
+      name='SignUp'
+      options={{ title: '' }}
+      component={SignUp}
+    />
+  </SignUpStackNavigator.Navigator>
 );
