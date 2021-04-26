@@ -10,10 +10,11 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Svg, { Circle } from 'react-native-svg';
 
+import colors from '../Constants/colors';
+
+// Import data
 import fruit from '../Data/fruit.json';
 import vegetable from '../Data/vegetable.json';
-
-import colors from '../Constants/colors';
 
 const styles = StyleSheet.create({
   container: {
@@ -32,7 +33,6 @@ const styles = StyleSheet.create({
   item: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: 10,
     paddingVertical: 10,
   },
   itemText: {
@@ -60,11 +60,20 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: 'PoppinsMedium',
   },
+  indicator: {
+    marginTop: 20,
+  },
 });
 
-export default function FavIngrList({ label, navigation, updateDataSet }) {
+export default function FavIngrList({ label, navigation, data }) {
+  /**
+   * @var dataSet : all favorite by type of food
+   * @var dataSelected : all favorites food selected
+   */
   const [dataSet, setDataSet] = useState();
+  const [dataSelected, setDataSelected] = useState(data);
 
+  // Init dataSet for FlatList
   useEffect(() => {
     if (label.toLowerCase() === 'fruit') {
       setDataSet(fruit);
@@ -73,10 +82,34 @@ export default function FavIngrList({ label, navigation, updateDataSet }) {
     } else if (label.toLowerCase() === 'meat') {
       setDataSet('futur meat list');
     }
-  }, [dataSet]);
+  }, []);
 
+  // Add SVG Circle to check radio button
+  const favoriteActivated = (item) => {
+    if (dataSelected.includes(item)) {
+      return <Circle cx='50' cy='50' r='30' fill={colors.orange} />;
+    }
+    return null;
+  };
+
+  // Add and remove ingredient to favorites
+  const handleFavorite = (item) => {
+    if (dataSelected.includes(item)) {
+      const dataSelectedFiltered = dataSelected.filter((i) => i !== item);
+      setDataSelected(dataSelectedFiltered);
+    } else if (!dataSelected.includes(item)) {
+      setDataSelected((actualData) => [...actualData, item]);
+    }
+  };
+
+  const updateDataSet = () => {
+    console.log(dataSelected);
+    navigation.goBack();
+  };
+
+  // RenderItem component
   const renderItemComponent = ({ item }) => (
-    <TouchableWithoutFeedback onPress={() => console.log(`${item} added`)}>
+    <TouchableWithoutFeedback onPress={() => handleFavorite(item)}>
       <View style={styles.item}>
         <Text style={styles.itemText}>
           {item.charAt(0).toUpperCase() + item.slice(1)}
@@ -87,10 +120,10 @@ export default function FavIngrList({ label, navigation, updateDataSet }) {
             cy='50'
             r='45'
             stroke={colors.green}
-            strokeWidth='5'
+            strokeWidth='7'
             fill='transparent'
           />
-          <Circle cx='50' cy='50' r='30' fill={colors.orange} />
+          {favoriteActivated(item.toLowerCase())}
         </Svg>
       </View>
     </TouchableWithoutFeedback>

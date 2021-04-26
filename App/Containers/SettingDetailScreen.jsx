@@ -64,17 +64,24 @@ export default function SettingDetailScreen({ route, navigation }) {
     favoriteType,
   } = route.params;
 
+  /**
+   * @var dataUpdate : input value
+   */
   const [dataUpdate, setDataUpdate] = useState(dataInput);
 
+  // Action for save button
   const updateSetting = () => {
+    console.log(dataUpdate);
     navigation.goBack();
   };
 
+  // Reformat phone number with regex
   const formatMobileNumber = (text) => {
     const phoneNumber = parsePhoneNumberFromString(text, 'FR');
     return phoneNumber.formatNational();
   };
 
+  // Handle when value changes
   const onChange = (text) => {
     if (dataLabel.toLowerCase() === 'phone') {
       const phoneText = formatMobileNumber(text);
@@ -84,6 +91,7 @@ export default function SettingDetailScreen({ route, navigation }) {
     }
   };
 
+  // Set new phone number with regex function
   useEffect(() => {
     if (dataLabel.toLowerCase() === 'phone') {
       const phoneText = formatMobileNumber(dataUpdate);
@@ -91,13 +99,14 @@ export default function SettingDetailScreen({ route, navigation }) {
     }
   });
 
+  // Component for favorite food list
   if (favoriteType) {
     return (
       <>
         <FavIngrList
           label={dataLabel}
           navigation={navigation}
-          updateDataSet={() => updateSetting()}
+          data={dataUpdate}
         />
       </>
     );
