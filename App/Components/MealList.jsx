@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginHorizontal: 10,
+    marginHorizontal: 20,
   },
   headerTitle: {
     fontFamily: 'PoppinsMedium',
@@ -35,6 +35,9 @@ const styles = StyleSheet.create({
     fontFamily: 'PoppinsRegular',
     color: colors.background,
   },
+  listContainer: {
+    marginHorizontal: 10,
+  },
 });
 
 export default function MealList(props) {
@@ -49,6 +52,9 @@ export default function MealList(props) {
         )}
         keyExtractor={(item) => item.id.toString()}
         showsVerticalScrollIndicator={false}
+        ListHeaderComponent={() => <View style={{ marginVertical: 10 }} />}
+        ListFooterComponent={() => <View style={{ marginVertical: 10 }} />}
+        ItemSeparatorComponent={() => <View style={{ marginVertical: 10 }} />}
       />
     );
   }
@@ -71,6 +77,9 @@ export default function MealList(props) {
         )}
         keyExtractor={(item) => item.id.toString()}
         horizontal={horizontalView}
+        ListHeaderComponent={() => <View style={{ marginHorizontal: 10 }} />}
+        ListFooterComponent={() => <View style={{ marginHorizontal: 10 }} />}
+        ItemSeparatorComponent={() => <View style={{ marginHorizontal: 10 }} />}
         showsHorizontalScrollIndicator={false}
       />
     </View>

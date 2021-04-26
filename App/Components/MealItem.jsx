@@ -16,7 +16,6 @@ const OBJ_KCAL = 1850;
 
 const styles = StyleSheet.create({
   itemContainerHome: {
-    marginHorizontal: 10,
     marginVertical: 20,
     paddingVertical: 10,
     paddingHorizontal: 15,
@@ -37,7 +36,6 @@ const styles = StyleSheet.create({
   },
   itemContainerMeal: {
     marginHorizontal: 10,
-    marginVertical: 10,
     paddingVertical: 5,
     paddingHorizontal: 15,
     backgroundColor: colors.background,

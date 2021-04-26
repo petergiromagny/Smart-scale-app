@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginHorizontal: 10,
+    marginHorizontal: 20,
   },
   headerTitle: {
     fontFamily: 'PoppinsMedium',
@@ -34,6 +34,9 @@ const styles = StyleSheet.create({
   textAll: {
     fontFamily: 'PoppinsRegular',
     color: colors.background,
+  },
+  listContainer: {
+    marginHorizontal: 10,
   },
 });
 
@@ -62,6 +65,11 @@ export default function RecipeList({ navigation, horizontalView }) {
           keyExtractor={(item) => item.recipe.label}
           horizontal={horizontalView}
           showsHorizontalScrollIndicator={false}
+          ListHeaderComponent={() => <View style={styles.listContainer} />}
+          ListFooterComponent={() => <View style={styles.listContainer} />}
+          ItemSeparatorComponent={() => (
+            <View style={{ marginHorizontal: 10 }} />
+          )}
         />
       </View>
     );
@@ -74,6 +82,9 @@ export default function RecipeList({ navigation, horizontalView }) {
           <RecipeItem data={item} navigation={navigation} />
         )}
         keyExtractor={(item) => item.recipe.label}
+        ListHeaderComponent={() => <View style={{ marginVertical: 5 }} />}
+        ListFooterComponent={() => <View style={{ marginVertical: 5 }} />}
+        ItemSeparatorComponent={() => <View style={{ marginVertical: 8 }} />}
       />
     </>
   );

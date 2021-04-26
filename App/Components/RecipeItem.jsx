@@ -19,8 +19,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: colors.background,
-    marginVertical: 10,
-    marginHorizontal: 10,
+    marginHorizontal: 15,
     paddingHorizontal: 10,
     paddingVertical: 10,
     borderRadius: 10,
@@ -40,7 +39,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: colors.background,
     marginVertical: 10,
-    marginHorizontal: 10,
     borderRadius: 10,
   },
   leftSide: {
