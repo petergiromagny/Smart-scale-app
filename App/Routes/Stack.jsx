@@ -49,8 +49,7 @@ const HomeStackNavigator = createStackNavigator();
 const RecipesStackNavigator = createStackNavigator();
 const MealsStackNavigator = createStackNavigator();
 const SettingsStackNavigator = createStackNavigator();
-const SignInStackNavigator = createStackNavigator();
-const SignUpStackNavigator = createStackNavigator();
+const AuthStackNavigator = createStackNavigator();
 
 export const HomeStack = () => (
   <HomeStackNavigator.Navigator screenOptions={headerOptions}>
@@ -135,22 +134,20 @@ export const SettingsStack = () => (
   </SettingsStackNavigator.Navigator>
 );
 
-export const SignInStack = () => (
-  <SignInStackNavigator.Navigator screenOptions={{ headerShown: false }}>
-    <SignInStackNavigator.Screen
+export const AuthStack = () => (
+  <AuthStackNavigator.Navigator
+    screenOptions={{ headerShown: false }}
+    initialRouteName='SignIn'
+  >
+    <AuthStackNavigator.Screen
       name='SignIn'
       options={{ title: '' }}
       component={SignIn}
     />
-  </SignInStackNavigator.Navigator>
-);
-
-export const SignUpStack = () => (
-  <SignUpStackNavigator.Navigator screenOptions={{ headerShown: false }}>
-    <SignUpStackNavigator.Screen
+    <AuthStackNavigator.Screen
       name='SignUp'
       options={{ title: '' }}
       component={SignUp}
     />
-  </SignUpStackNavigator.Navigator>
+  </AuthStackNavigator.Navigator>
 );

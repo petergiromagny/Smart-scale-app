@@ -11,6 +11,7 @@ import SettingDetailScreen from '../Containers/SettingDetailScreen';
 import CloseButton from '../Components/CloseButton';
 import DrawerRoutes from './Drawer';
 import colors from '../Constants/colors';
+import { AuthStack } from './Stack';
 
 const MainStackNavigator = createStackNavigator();
 
@@ -36,10 +37,19 @@ const headerOptions = () => ({
 
 const MainStack = () => (
   <NavigationContainer>
-    <MainStackNavigator.Navigator mode='modal' screenOptions={headerOptions}>
+    <MainStackNavigator.Navigator
+      mode='modal'
+      screenOptions={headerOptions}
+      initialRouteName='Auth'
+    >
       <MainStackNavigator.Screen
         name='Drawer'
         component={DrawerRoutes}
+        options={{ headerShown: false }}
+      />
+      <MainStackNavigator.Screen
+        name='Auth'
+        component={AuthStack}
         options={{ headerShown: false }}
       />
       <MainStackNavigator.Screen

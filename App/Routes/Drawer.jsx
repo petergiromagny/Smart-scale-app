@@ -5,13 +5,7 @@ import {
   MaterialCommunityIcons,
   MaterialIcons,
 } from '@expo/vector-icons';
-import {
-  HomeStack,
-  MealsStack,
-  RecipesStack,
-  SettingsStack,
-  SignInStack,
-} from './Stack';
+import { HomeStack, MealsStack, RecipesStack, SettingsStack } from './Stack';
 
 import colors from '../Constants/colors';
 import DrawerContent from '../Components/DrawerContent';
@@ -89,13 +83,6 @@ const DrawerRoutes = () => (
             color={focused ? colors.dark : colors.green}
           />
         ),
-      }}
-    />
-    <Drawer.Screen
-      name='SignIn'
-      component={SignInStack}
-      options={{
-        title: 'Sign In',
       }}
     />
   </Drawer.Navigator>
