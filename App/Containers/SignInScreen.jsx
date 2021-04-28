@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   Keyboard,
 } from 'react-native';
-
 import { Ionicons } from '@expo/vector-icons';
 
 import InputAuth from '../Components/InputAuth';
@@ -73,6 +72,12 @@ export default class SignInScreen extends Component {
     };
   }
 
+  handleSubmitSignIn() {
+    // TODO: Add Firebase auth + redirect to home
+    const { navigation } = this.props;
+    navigation.replace('Drawer');
+  }
+
   render() {
     const { navigation } = this.props;
 
@@ -92,8 +97,8 @@ export default class SignInScreen extends Component {
           <InputAuth
             label='Email'
             placeholder='youremail@gmail.com'
-            textType='emailAddress'
-            keyboard='email-address'
+            textContentType='emailAddress'
+            keyboardType='email-address'
             icon={
               <Ionicons name='mail-outline' size={24} color={colors.dark} />
             }
@@ -102,9 +107,9 @@ export default class SignInScreen extends Component {
           <InputAuth
             label='Password'
             placeholder='•••••••••••'
-            textType='password'
+            textContentType='password'
             secureTextEntry
-            keyboard='default'
+            keyboardType='default'
             icon={
               <Ionicons
                 name='lock-closed-outline'
@@ -116,7 +121,7 @@ export default class SignInScreen extends Component {
 
           <TouchableOpacity
             style={styles.signInButton}
-            onPress={() => console.log('Sign in')}
+            onPress={() => this.handleSubmitSignIn()}
           >
             <Text style={styles.signInButtonText}>Sign in</Text>
           </TouchableOpacity>
