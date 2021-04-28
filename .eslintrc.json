@@ -42,7 +42,8 @@
           "DrawerContentScrollView",
           "DrawerItemList",
           "DrawerContent",
-          "HeaderBackButton"
+          "HeaderBackButton",
+          "TextInput"
         ]
       }
     ]
