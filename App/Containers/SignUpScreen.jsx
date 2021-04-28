@@ -69,8 +69,22 @@ export default class SignUpScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // Add state
+      name: '',
+      email: '',
+      password: '',
+      confPassword: '',
     };
+  }
+
+  handleSubmitSignUp() {
+    // TODO: Add Firebase auth
+    const { name, email, password, confPassword } = this.state;
+    console.log(`Name: ${name}`);
+    console.log(`Email: ${email}`);
+    console.log(`Password: ${password}`);
+    console.log(`Confirmation Password: ${confPassword}`);
+    /* const { navigation } = this.props;
+    navigation.navigate('StepObj'); */
   }
 
   render() {
@@ -88,10 +102,12 @@ export default class SignUpScreen extends Component {
           </View>
 
           <InputAuth
-            label='Username'
-            placeholder='yourusername'
-            textType='emailAddress'
-            keyboard='email-address'
+            label='Name'
+            placeholder='Your name'
+            textContentType='name'
+            keyboardType='default'
+            spellCheck={false}
+            onChangeText={(value) => this.setState({ name: value })}
             icon={
               <Ionicons name='person-outline' size={24} color={colors.dark} />
             }
@@ -100,8 +116,12 @@ export default class SignUpScreen extends Component {
           <InputAuth
             label='E-Mail'
             placeholder='youremail@gmail.com'
-            textType='emailAddress'
-            keyboard='email-address'
+            textContentType='emailAddress'
+            keyboardType='email-address'
+            autoCorrect={false}
+            spellCheck={false}
+            autoCapitalize='none'
+            onChangeText={(value) => this.setState({ email: value })}
             icon={
               <Ionicons name='mail-outline' size={24} color={colors.dark} />
             }
@@ -110,9 +130,11 @@ export default class SignUpScreen extends Component {
           <InputAuth
             label='Password'
             placeholder='•••••••••••'
-            textType='password'
+            textContentType='password'
             secureTextEntry
-            keyboard='default'
+            keyboardType='default'
+            spellCheck={false}
+            onChangeText={(value) => this.setState({ password: value })}
             icon={
               <Ionicons
                 name='lock-closed-outline'
@@ -125,9 +147,11 @@ export default class SignUpScreen extends Component {
           <InputAuth
             label='Confirm your password'
             placeholder='•••••••••••'
-            textType='password'
+            textContentType='password'
             secureTextEntry
-            keyboard='default'
+            keyboardType='default'
+            spellCheck={false}
+            onChangeText={(value) => this.setState({ confPassword: value })}
             icon={
               <Ionicons
                 name='lock-closed-outline'
@@ -139,7 +163,7 @@ export default class SignUpScreen extends Component {
 
           <TouchableOpacity
             style={styles.signInButton}
-            onPress={() => console.log('Sign up')}
+            onPress={() => this.handleSubmitSignUp()}
           >
             <Text style={styles.signInButtonText}>Sign up</Text>
           </TouchableOpacity>
