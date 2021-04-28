@@ -14,6 +14,8 @@ import RecipeDetailScreen from '../Containers/RecipeDetailScreen';
 import Settings from '../Containers/SettingsScreen';
 import SignIn from '../Containers/SignInScreen';
 import SignUp from '../Containers/SignUpScreen';
+import StepObj from '../Containers/StepObjScreen';
+import StepFav from '../Containers/StepFavScreen';
 
 import Avatar from '../Components/Avatar';
 import Hamburger from '../Components/Hamburger';
@@ -148,6 +150,16 @@ export const AuthStack = () => (
       name='SignUp'
       options={{ title: '' }}
       component={SignUp}
+    />
+    <AuthStackNavigator.Screen
+      name='StepObj'
+      options={{ title: '' }}
+      component={StepObj}
+    />
+    <AuthStackNavigator.Screen
+      name='StepFav'
+      options={{ title: '' }}
+      component={StepFav}
     />
   </AuthStackNavigator.Navigator>
 );
