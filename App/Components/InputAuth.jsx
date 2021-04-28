@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
   },
   textInputContainer: {
     flexDirection: 'row',
+    alignItems: 'center',
     paddingHorizontal: 15,
     paddingVertical: 10,
     backgroundColor: colors.background,
@@ -29,30 +30,23 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   textInput: {
+    height: 30,
     flex: 5,
   },
 });
 
-export default function InputAuth({
-  label,
-  placeholder,
-  icon,
-  secureTextEntry,
-  textType,
-  keyboard,
-}) {
+export default function InputAuth(props) {
+  const { label, icon } = props;
+
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
       <View style={styles.textInputContainer}>
         <TextInput
           style={styles.textInput}
-          placeholder={placeholder}
-          secureTextEntry={secureTextEntry}
           selectionColor={colors.green}
-          textContentType={textType}
-          keyboardType={keyboard}
           keyboardAppearance='dark'
+          {...props}
         />
         {icon}
       </View>
