@@ -10,6 +10,7 @@ import {
 import colors from '../Constants/colors';
 import mealData from '../Data/lastMeal.json';
 import MealItem from './MealItem';
+import ScanButton from './ScanButton';
 
 const styles = StyleSheet.create({
   container: {
@@ -38,11 +39,26 @@ const styles = StyleSheet.create({
   listContainer: {
     marginHorizontal: 10,
   },
+  scanTitle: {
+    fontFamily: 'PoppinsMedium',
+    fontSize: 20,
+    textAlign: 'center',
+  },
 });
 
 export default function MealList(props) {
   const { horizontalView, navigation } = props;
 
+  if (mealData.length === 0) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.scanTitle}>Lets scan your first meal,</Text>
+        <ScanButton />
+      </View>
+    );
+  }
+
+  // Basic FlatList for LastMealScreen
   if (!horizontalView) {
     return (
       <FlatList

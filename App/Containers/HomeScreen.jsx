@@ -35,10 +35,6 @@ export default class Home extends Component {
         </View>
         <MealList horizontalView navigation={navigation} />
         <RecipeList horizontalView navigation={navigation} />
-        {/*         <Button
-          title='See recipes'
-          actionPress={() => navigation.navigate('Recipes')}
-        /> */}
       </View>
     );
   }
