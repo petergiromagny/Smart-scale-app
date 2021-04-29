@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import InputAuth from '../Components/InputAuth';
+import SettingItem from '../Components/SettingItem';
 
 import colors from '../Constants/colors';
 
@@ -24,13 +24,14 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: 'PoppinsBold',
-    fontSize: 25,
+    fontSize: 30,
     textAlign: 'center',
-    marginBottom: 20,
+    marginBottom: 40,
   },
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    marginTop: 20,
   },
   nextButton: {
     paddingVertical: 13,
@@ -81,12 +82,19 @@ export default class StepObjScreen extends Component {
     super(props);
     this.navigation = this.props;
     this.state = {
-      // Add state
+      vegetables: [],
+      fruits: [],
+      meat: [],
     };
   }
 
   handleSubmitStepFav() {
-    this.navigation.replace('Drawer');
+    // const { navigation } = this.props;
+    const { vegetables, fruits, meat } = this.state;
+    console.log(`Vegetables: ${vegetables}`);
+    console.log(`Fruits: ${fruits}`);
+    console.log(`Meat: ${meat}`);
+    // navigation.replace('Drawer');
   }
 
   render() {
@@ -97,13 +105,33 @@ export default class StepObjScreen extends Component {
         style={styles.dismissKeyboard}
       >
         <View style={styles.container}>
-          <Text style={styles.title}>Your favorites food</Text>
-          <InputAuth
-            label=''
-            placeholder=''
-            textContentType='none'
-            keyboardType='decimal-pad'
+          <Text style={styles.title}>Choose your favourites food</Text>
+
+          <SettingItem
+            dataLabel='Vegetable'
+            dataType='default'
+            dataInput=''
+            navigation={navigation}
+            favouriteType
+            stepSignUp
           />
+          <SettingItem
+            dataLabel='Fruit'
+            dataInput=''
+            dataType='default'
+            navigation={navigation}
+            favouriteType
+            stepSignUp
+          />
+          <SettingItem
+            dataLabel='Meat'
+            dataInput=''
+            dataType='default'
+            navigation={navigation}
+            favouriteType
+            stepSignUp
+          />
+
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               style={styles.backButton}
