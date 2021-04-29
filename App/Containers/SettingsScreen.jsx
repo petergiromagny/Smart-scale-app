@@ -31,9 +31,10 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     flexDirection: 'row',
     justifyContent: 'center',
+    alignItems: 'center',
   },
   signOutButtonText: {
-    fontFamily: 'PoppinsMedium',
+    fontFamily: 'PoppinsRegular',
     fontSize: 18,
     color: colors.background,
     textAlign: 'center',
@@ -130,7 +131,7 @@ export default class Settings extends Component {
           onPress={() => this.handleSignOut()}
         >
           <Text style={styles.signOutButtonText}>Sign Out</Text>
-          <MaterialIcons name='logout' size={24} color={colors.background} />
+          <MaterialIcons name='logout' size={20} color={colors.background} />
         </TouchableOpacity>
       </ScrollView>
     );
