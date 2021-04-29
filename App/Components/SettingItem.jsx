@@ -12,7 +12,21 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginVertical: 5,
   },
+  itemContainerReverse: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    height: 70,
+    marginVertical: 5,
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    backgroundColor: colors.green,
+    borderRadius: 10,
+  },
   dataContainer: {
+    flexDirection: 'column',
+  },
+  dataContainerReverse: {
     flexDirection: 'column',
   },
   dataLabel: {
@@ -20,8 +34,18 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: colors.green,
   },
+  dataLabelReverse: {
+    fontFamily: 'PoppinsRegular',
+    fontSize: 18,
+    color: colors.background,
+  },
   dataInput: {
     fontFamily: 'PoppinsMedium',
+  },
+  dataInputReverse: {
+    fontFamily: 'PoppinsMedium',
+    fontSize: 15,
+    color: colors.background,
   },
   svgContainer: {
     width: 14,
@@ -40,7 +64,8 @@ export default function SettingItem({
   dataType,
   maxNumber,
   navigation,
-  favoriteType,
+  favouriteType,
+  stepSignUp,
 }) {
   const [dataUpdate, setDataUpdate] = useState(dataInput);
 
@@ -49,12 +74,55 @@ export default function SettingItem({
     return phoneNumber.formatNational();
   };
 
+  const displayDataInButton = (label, values) => {
+    if (dataUpdate) {
+      return (
+        <View style={styles.dataContainer}>
+          <Text style={styles.dataLabelReverse}>{label}</Text>
+          <Text style={styles.dataInputReverse}>{values}</Text>
+        </View>
+      );
+    }
+    return (
+      <View style={styles.dataContainer}>
+        <Text style={styles.dataLabelReverse}>{label}</Text>
+      </View>
+    );
+  };
+
   useEffect(() => {
     if (dataLabel.toLowerCase() === 'phone') {
       const phoneText = formatMobileNumber(dataUpdate);
       setDataUpdate(phoneText);
     }
   });
+
+  if (stepSignUp) {
+    return (
+      <TouchableOpacity
+        style={styles.itemContainerReverse}
+        onPress={() =>
+          navigation.navigate('SettingDetailScreen', {
+            dataInput,
+            dataLabel,
+            dataType,
+            maxNumber,
+            favouriteType,
+          })
+        }
+      >
+        {displayDataInButton(dataLabel, dataUpdate)}
+        <View style={styles.svgContainer}>
+          <Svg width='100%' height='100%' viewBox='0 0 100 100'>
+            <Path
+              fill={colors.background}
+              d='M68.82,98a9.54,9.54,0,0,1-6.63-2.67L26.12,60.53a14.62,14.62,0,0,1,0-21.06L62.19,4.67A9.54,9.54,0,0,1,75.44,18.41L42.69,50,75.44,81.59A9.54,9.54,0,0,1,68.82,98Z'
+            />
+          </Svg>
+        </View>
+      </TouchableOpacity>
+    );
+  }
 
   return (
     <TouchableOpacity
@@ -65,7 +133,7 @@ export default function SettingItem({
           dataLabel,
           dataType,
           maxNumber,
-          favoriteType,
+          favouriteType,
         })
       }
     >

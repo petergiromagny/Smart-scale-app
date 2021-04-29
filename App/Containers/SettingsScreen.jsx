@@ -79,21 +79,21 @@ export default class Settings extends Component {
             dataInput='Peas'
             dataType='default'
             navigation={navigation}
-            favoriteType
+            favouriteType
           />
           <SettingItem
             dataLabel='Fruit'
             dataInput='Kiwi'
             dataType='default'
             navigation={navigation}
-            favoriteType
+            favouriteType
           />
           <SettingItem
             dataLabel='Meat'
             dataInput='Beef'
             dataType='default'
             navigation={navigation}
-            favoriteType
+            favouriteType
           />
         </SettingsContent>
       </ScrollView>
