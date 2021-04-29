@@ -43,17 +43,20 @@ const styles = StyleSheet.create({
     fontFamily: 'PoppinsMedium',
     fontSize: 20,
     textAlign: 'center',
+    marginHorizontal: 25,
   },
 });
 
 export default function MealList(props) {
   const { horizontalView, navigation } = props;
 
-  if (mealData.length === 0) {
+  if (mealData.length > 0) {
     return (
       <View style={styles.container}>
-        <Text style={styles.scanTitle}>Lets scan your first meal,</Text>
-        <ScanButton />
+        <Text style={styles.scanTitle}>
+          Start the Smart Scale experience scan your first meal.
+        </Text>
+        <ScanButton navigation={navigation} />
       </View>
     );
   }
