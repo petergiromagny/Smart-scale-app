@@ -100,7 +100,7 @@ export default class SignInScreen extends Component {
           </View>
 
           <InputAuth
-            label='Email'
+            label='E-Mail'
             placeholder='youremail@gmail.com'
             textContentType='emailAddress'
             keyboardType='email-address'
