@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
-import { StyleSheet, ScrollView, Platform } from 'react-native';
+import {
+  StyleSheet,
+  ScrollView,
+  Platform,
+  TouchableOpacity,
+  Text,
+} from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
+
 import SettingsContent from '../Components/SettingsContent';
 
 import settingsIcon from '../Assets/Images/settingsWIcon.png';
@@ -16,6 +24,21 @@ const styles = StyleSheet.create({
     paddingBottom: 30,
     ...(Platform.OS === 'ios' ? { marginTop: 15 } : {}),
   },
+  signOutButton: {
+    marginTop: 10,
+    backgroundColor: colors.green,
+    borderRadius: 10,
+    paddingVertical: 15,
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  signOutButtonText: {
+    fontFamily: 'PoppinsMedium',
+    fontSize: 18,
+    color: colors.background,
+    textAlign: 'center',
+    marginRight: 10,
+  },
 });
 
 export default class Settings extends Component {
@@ -25,6 +48,12 @@ export default class Settings extends Component {
     this.state = {
       // Add State
     };
+  }
+
+  handleSignOut() {
+    const { navigation } = this.props;
+    navigation.replace('Auth');
+    console.log('Sign out');
   }
 
   render() {
@@ -96,6 +125,13 @@ export default class Settings extends Component {
             favouriteType
           />
         </SettingsContent>
+        <TouchableOpacity
+          style={styles.signOutButton}
+          onPress={() => this.handleSignOut()}
+        >
+          <Text style={styles.signOutButtonText}>Sign Out</Text>
+          <MaterialIcons name='logout' size={24} color={colors.background} />
+        </TouchableOpacity>
       </ScrollView>
     );
   }

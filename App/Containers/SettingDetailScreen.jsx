@@ -28,10 +28,17 @@ const styles = StyleSheet.create({
   input: {
     fontFamily: 'PoppinsRegular',
     paddingVertical: 15,
-    marginVertical: 10,
-    borderWidth: 1,
+    marginVertical: 20,
+    backgroundColor: colors.background,
     borderRadius: 10,
-    borderColor: colors.green,
+    shadowColor: colors.green,
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+    elevation: 5,
   },
   buttonContainer: {
     flexDirection: 'row',
