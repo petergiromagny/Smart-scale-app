@@ -13,8 +13,7 @@
   },
   "plugins": ["react"],
   "rules": {
-    "indent": ["error", 2],
-    // "linebreak-style": ["error", "windows"],
+    "indent": ["error", 2, { "SwitchCase": 1 }],
     "comma-dangle": ["error", "only-multiline"],
     "operator-linebreak": [
       "error",
@@ -43,7 +42,8 @@
           "DrawerItemList",
           "DrawerContent",
           "HeaderBackButton",
-          "TextInput"
+          "TextInput",
+          "TouchableOpacity"
         ]
       }
     ]
