@@ -79,12 +79,12 @@ export default class SignUpScreen extends Component {
   handleSubmitSignUp() {
     // TODO: Add Firebase auth
     const { name, email, password, confPassword } = this.state;
+    const { navigation } = this.props;
     console.log(`Name: ${name}`);
     console.log(`Email: ${email}`);
     console.log(`Password: ${password}`);
     console.log(`Confirmation Password: ${confPassword}`);
-    /* const { navigation } = this.props;
-    navigation.navigate('StepObj'); */
+    navigation.navigate('StepObj');
   }
 
   render() {

@@ -68,13 +68,18 @@ export default class SignInScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // Add state
+      email: '',
+      password: '',
     };
   }
 
   handleSubmitSignIn() {
     // TODO: Add Firebase auth + redirect to home
     const { navigation } = this.props;
+    const { email, password } = this.state;
+    console.log(`Email: ${email}`);
+    console.log(`Password: ${password}`);
+
     navigation.replace('Drawer');
   }
 
@@ -99,6 +104,10 @@ export default class SignInScreen extends Component {
             placeholder='youremail@gmail.com'
             textContentType='emailAddress'
             keyboardType='email-address'
+            autoCorrect={false}
+            spellCheck={false}
+            autoCapitalize='none'
+            onChangeText={(value) => this.setState({ email: value })}
             icon={
               <Ionicons name='mail-outline' size={24} color={colors.dark} />
             }
@@ -110,6 +119,7 @@ export default class SignInScreen extends Component {
             textContentType='password'
             secureTextEntry
             keyboardType='default'
+            onChangeText={(value) => this.setState({ password: value })}
             icon={
               <Ionicons
                 name='lock-closed-outline'

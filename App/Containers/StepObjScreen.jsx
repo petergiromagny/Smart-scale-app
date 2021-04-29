@@ -24,9 +24,9 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: 'PoppinsBold',
-    fontSize: 25,
+    fontSize: 30,
     textAlign: 'center',
-    marginBottom: 20,
+    marginBottom: 15,
   },
   inputKcal: {
     fontFamily: 'PoppinsMedium',
@@ -35,10 +35,10 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    marginTop: 20,
   },
   nextButton: {
     paddingVertical: 13,
-    marginTop: 20,
     backgroundColor: colors.green,
     borderRadius: 10,
     width: '48%',
@@ -59,7 +59,6 @@ const styles = StyleSheet.create({
   },
   backButton: {
     paddingVertical: 13,
-    marginTop: 20,
     backgroundColor: colors.background,
     borderRadius: 10,
     width: '48%',
@@ -90,11 +89,9 @@ export default class StepObjScreen extends Component {
 
   handleSubmitStepObj() {
     const { navigation } = this.props;
+    const { calories } = this.state;
+    console.log(`Calories: ${calories}`);
     navigation.navigate('StepFav');
-  }
-
-  handleOnChange(value) {
-    this.setState({ calories: value });
   }
 
   render() {
@@ -112,9 +109,11 @@ export default class StepObjScreen extends Component {
             textContentType='none'
             keyboardType='number-pad'
             textAlign='center'
+            autoCorrect={false}
+            spellCheck={false}
             icon={<Text style={styles.inputKcal}>Kcal</Text>}
             maxLength={4}
-            onChangeText={(value) => this.handleOnChange(value)}
+            onChangeText={(value) => this.setState({ calories: value })}
           />
           <View style={styles.buttonContainer}>
             <TouchableOpacity
