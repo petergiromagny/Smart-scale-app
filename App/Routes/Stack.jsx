@@ -11,6 +11,8 @@ import Meals from '../Containers/MealsScreen';
 import MealDetailScreen from '../Containers/MealDetailScreen';
 import Recipes from '../Containers/RecipesScreen';
 import RecipeDetailScreen from '../Containers/RecipeDetailScreen';
+import ScanningScreen from '../Containers/ScanningScreen';
+import ScanResultScreen from '../Containers/ScanResultScreen';
 import Settings from '../Containers/SettingsScreen';
 import SignIn from '../Containers/SignInScreen';
 import SignUp from '../Containers/SignUpScreen';
@@ -31,7 +33,7 @@ const headerOptions = ({ navigation, route }) => ({
   },
   cardStyle: { backgroundColor: colors.background },
   headerLeftContainerStyle: { marginLeft: 20 },
-  headerTintColor: colors.orange,
+  headerTintColor: colors.dark,
   headerTitleAlign: 'center',
   headerRight: () => {
     if (route.name.toLowerCase() === 'home') {
@@ -47,9 +49,15 @@ const headerOptions = ({ navigation, route }) => ({
   ),
 });
 
+const headerTitleStyle = () => ({
+  fontFamily: 'PoppinsMedium',
+  fontSize: 20,
+});
+
 const HomeStackNavigator = createStackNavigator();
 const RecipesStackNavigator = createStackNavigator();
 const MealsStackNavigator = createStackNavigator();
+const ScanStackNavigator = createStackNavigator();
 const SettingsStackNavigator = createStackNavigator();
 const AuthStackNavigator = createStackNavigator();
 
@@ -59,6 +67,16 @@ export const HomeStack = () => (
       name='Home'
       options={{ title: '' }}
       component={Home}
+    />
+    <ScanStackNavigator.Screen
+      name='ScanResult'
+      options={{
+        title: 'Scan Result',
+        headerTitleStyle: headerTitleStyle(),
+        headerLeft: '',
+        gestureEnabled: false,
+      }}
+      component={ScanResultScreen}
     />
     <RecipesStackNavigator.Screen
       name='RecipeDetailHome'
@@ -81,7 +99,11 @@ export const RecipesStack = () => (
   <RecipesStackNavigator.Navigator screenOptions={headerOptions}>
     <RecipesStackNavigator.Screen
       name='Recipes'
-      options={{ title: '', headerTransparent: true }}
+      options={{
+        title: 'Recipes',
+        headerTransparent: true,
+        headerTitleStyle: headerTitleStyle(),
+      }}
       component={Recipes}
     />
     <RecipesStackNavigator.Screen
@@ -90,6 +112,7 @@ export const RecipesStack = () => (
         title: '',
         headerTransparent: true,
         headerTruncatedBackTitle: '',
+        headerBackTitle: '',
         headerBackImage: () => <BackButton />,
         headerLeft: (props) => (
           <HeaderBackButton {...props} style={{ marginHorizontal: 0 }} />
@@ -105,7 +128,11 @@ export const MealsStack = () => (
   <MealsStackNavigator.Navigator screenOptions={headerOptions}>
     <MealsStackNavigator.Screen
       name='Meals'
-      options={{ title: '', headerTransparent: true }}
+      options={{
+        title: 'Last Meals',
+        headerTransparent: true,
+        headerTitleStyle: headerTitleStyle(),
+      }}
       component={Meals}
     />
     <MealsStackNavigator.Screen
@@ -114,6 +141,7 @@ export const MealsStack = () => (
         title: '',
         headerTransparent: true,
         headerTruncatedBackTitle: '',
+        headerBackTitle: '',
         headerBackImage: () => <BackButton />,
         headerLeft: (props) => (
           <HeaderBackButton {...props} style={{ marginHorizontal: 0 }} />
@@ -126,11 +154,37 @@ export const MealsStack = () => (
   </MealsStackNavigator.Navigator>
 );
 
+export const ScanStack = () => (
+  <ScanStackNavigator.Navigator screenOptions={headerOptions}>
+    <ScanStackNavigator.Screen
+      name='Scan'
+      options={{
+        title: 'Scanner',
+        headerTitleStyle: headerTitleStyle(),
+      }}
+      component={ScanningScreen}
+    />
+    <ScanStackNavigator.Screen
+      name='ScanResult'
+      options={{
+        title: 'Scan Result',
+        headerTitleStyle: headerTitleStyle(),
+        headerLeft: '',
+        gestureEnabled: false,
+      }}
+      component={ScanResultScreen}
+    />
+  </ScanStackNavigator.Navigator>
+);
+
 export const SettingsStack = () => (
   <SettingsStackNavigator.Navigator screenOptions={headerOptions}>
     <SettingsStackNavigator.Screen
       name='Settings'
-      options={{ title: '' }}
+      options={{
+        title: 'Settings',
+        headerTitleStyle: headerTitleStyle(),
+      }}
       component={Settings}
     />
   </SettingsStackNavigator.Navigator>

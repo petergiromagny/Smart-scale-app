@@ -8,10 +8,14 @@ import {
 
 import MealDetailScreen from '../Containers/MealDetailScreen';
 import SettingDetailScreen from '../Containers/SettingDetailScreen';
+
 import CloseButton from '../Components/CloseButton';
+
 import DrawerRoutes from './Drawer';
-import colors from '../Constants/colors';
 import { AuthStack } from './Stack';
+
+import colors from '../Constants/colors';
+import ScanAddScreen from '../Containers/ScanAddScreen';
 
 const MainStackNavigator = createStackNavigator();
 
@@ -66,6 +70,11 @@ const MainStack = () => (
       <MainStackNavigator.Screen
         name='SettingDetailScreen'
         component={SettingDetailScreen}
+        options={{ headerShown: false }}
+      />
+      <MainStackNavigator.Screen
+        name='ScanAdd'
+        component={ScanAddScreen}
         options={{ headerShown: false }}
       />
     </MainStackNavigator.Navigator>

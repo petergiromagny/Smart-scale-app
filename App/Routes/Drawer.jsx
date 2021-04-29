@@ -4,13 +4,34 @@ import {
   Entypo,
   MaterialCommunityIcons,
   MaterialIcons,
+  Ionicons,
 } from '@expo/vector-icons';
-import { HomeStack, MealsStack, RecipesStack, SettingsStack } from './Stack';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+import {
+  HomeStack,
+  MealsStack,
+  RecipesStack,
+  ScanStack,
+  SettingsStack,
+} from './Stack';
 
 import colors from '../Constants/colors';
 import DrawerContent from '../Components/DrawerContent';
 
 const Drawer = createDrawerNavigator();
+
+// Disable swipe if screen is not Scan
+const getSwipeEnabled = (route) => {
+  const routeName = getFocusedRouteNameFromRoute(route) ?? 'Scan';
+  switch (routeName) {
+    case 'Scan':
+      return true;
+    case 'home':
+      return true;
+    default:
+      return false;
+  }
+};
 
 const DrawerRoutes = () => (
   <Drawer.Navigator
@@ -27,6 +48,7 @@ const DrawerRoutes = () => (
         justifyContent: 'center',
       },
     }}
+    drawerLockMode='locked-closed'
     drawerContent={(props) => <DrawerContent {...props} />}
   >
     <Drawer.Screen
@@ -70,6 +92,21 @@ const DrawerRoutes = () => (
           />
         ),
       }}
+    />
+    <Drawer.Screen
+      name='Scan'
+      component={ScanStack}
+      options={({ route }) => ({
+        title: 'Scanner',
+        drawerIcon: ({ size, focused }) => (
+          <Ionicons
+            name='ios-scan-circle-sharp'
+            size={size}
+            color={focused ? colors.dark : colors.green}
+          />
+        ),
+        swipeEnabled: getSwipeEnabled(route),
+      })}
     />
     <Drawer.Screen
       name='Settings'
