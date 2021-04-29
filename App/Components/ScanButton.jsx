@@ -1,8 +1,16 @@
-import React from 'react';
-import { StyleSheet, TouchableOpacity, View, Dimensions } from 'react-native';
+import React, { useState } from 'react';
+import {
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  Dimensions,
+  Modal,
+  Text,
+} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import colors from '../Constants/colors';
+import ScanningAnimation from './ScanningAnimation';
 
 const { width } = Dimensions.get('window');
 
@@ -15,7 +23,6 @@ const styles = StyleSheet.create({
   button: {
     justifyContent: 'center',
     alignItems: 'center',
-    paddingLeft: 10,
     width: width / 2.5,
     height: width / 2.5,
     borderRadius: 100,
@@ -29,17 +36,54 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
     elevation: 5,
   },
+  modalContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.greenOpacity,
+  },
+  modal: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.background,
+    borderRadius: 15,
+    width: width / 1.3,
+    height: width / 1.3,
+  },
+  text: {
+    fontFamily: 'PoppinsMedium',
+    fontSize: 25,
+    color: colors.orange,
+  },
 });
 
-export default function ScanButton() {
+export default function ScanButton({ navigation }) {
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const handleDisplayScanResult = () => {
+    setModalVisible(false);
+    navigation.navigate('ScanResult');
+  };
   return (
-    <View style={styles.container}>
-      <TouchableOpacity
-        onPress={() => console.log('Scanning')}
-        style={styles.button}
-      >
-        <Ionicons name='play' size={100} color={colors.green} />
-      </TouchableOpacity>
-    </View>
+    <>
+      <Modal transparent animationType='fade' visible={modalVisible}>
+        <View style={styles.modalContainer}>
+          <View style={styles.modal}>
+            <ScanningAnimation radius={width / 3.5} />
+            <TouchableOpacity onPress={() => handleDisplayScanResult()}>
+              <Text>Close modal</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+      <View style={styles.container}>
+        <TouchableOpacity
+          onPress={() => setModalVisible(true)}
+          style={styles.button}
+        >
+          <Ionicons name='scan-sharp' size={100} color={colors.green} />
+        </TouchableOpacity>
+      </View>
+    </>
   );
 }
