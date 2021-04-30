@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
 export default function MealList(props) {
   const { horizontalView, navigation } = props;
 
-  if (mealData.length > 0) {
+  if (mealData.length === 0) {
     return (
       <View style={styles.container}>
         <Text style={styles.scanTitle}>

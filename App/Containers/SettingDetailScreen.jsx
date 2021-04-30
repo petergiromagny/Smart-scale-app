@@ -68,7 +68,7 @@ export default function SettingDetailScreen({ route, navigation }) {
     dataInput,
     dataType,
     maxNumber,
-    favouriteType,
+    favoriteType,
   } = route.params;
 
   /**
@@ -107,7 +107,7 @@ export default function SettingDetailScreen({ route, navigation }) {
   });
 
   // Component for favorite food list
-  if (favouriteType) {
+  if (favoriteType) {
     return (
       <>
         <FavIngrList

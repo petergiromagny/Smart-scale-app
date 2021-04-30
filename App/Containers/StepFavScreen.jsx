@@ -105,14 +105,14 @@ export default class StepObjScreen extends Component {
         style={styles.dismissKeyboard}
       >
         <View style={styles.container}>
-          <Text style={styles.title}>Choose your favourites food</Text>
+          <Text style={styles.title}>Choose your favorites food</Text>
 
           <SettingItem
             dataLabel='Vegetable'
             dataType='default'
             dataInput=''
             navigation={navigation}
-            favouriteType
+            favoriteType
             stepSignUp
           />
           <SettingItem
@@ -120,7 +120,7 @@ export default class StepObjScreen extends Component {
             dataInput=''
             dataType='default'
             navigation={navigation}
-            favouriteType
+            favoriteType
             stepSignUp
           />
           <SettingItem
@@ -128,7 +128,7 @@ export default class StepObjScreen extends Component {
             dataInput=''
             dataType='default'
             navigation={navigation}
-            favouriteType
+            favoriteType
             stepSignUp
           />
 

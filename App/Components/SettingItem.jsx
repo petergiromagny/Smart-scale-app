@@ -64,7 +64,7 @@ export default function SettingItem({
   dataType,
   maxNumber,
   navigation,
-  favouriteType,
+  favoriteType,
   stepSignUp,
 }) {
   const [dataUpdate, setDataUpdate] = useState(dataInput);
@@ -107,7 +107,7 @@ export default function SettingItem({
             dataLabel,
             dataType,
             maxNumber,
-            favouriteType,
+            favoriteType,
           })
         }
       >
@@ -133,7 +133,7 @@ export default function SettingItem({
           dataLabel,
           dataType,
           maxNumber,
-          favouriteType,
+          favoriteType,
         })
       }
     >

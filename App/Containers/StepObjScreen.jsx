@@ -102,7 +102,7 @@ export default class StepObjScreen extends Component {
         style={styles.dismissKeyboard}
       >
         <View style={styles.container}>
-          <Text style={styles.title}>Your daily calory objective</Text>
+          <Text style={styles.title}>Your daily calorie objective</Text>
           <InputAuth
             label=''
             placeholder='2000'

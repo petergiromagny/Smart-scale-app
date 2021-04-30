@@ -63,7 +63,7 @@ export default class Settings extends Component {
       <ScrollView style={styles.container}>
         <SettingsContent
           title='Account'
-          subtitle='Informations about you in details'
+          subtitle='Informations about you'
           icon={settingsIcon}
         >
           <SettingItem
@@ -88,7 +88,7 @@ export default class Settings extends Component {
         </SettingsContent>
         <SettingsContent
           title='Objectives'
-          subtitle='Informations about your objectif'
+          subtitle='Informations about your objectives'
           icon={targetIcon}
         >
           <SettingItem
@@ -101,7 +101,7 @@ export default class Settings extends Component {
         </SettingsContent>
         <SettingsContent
           title='Favorites'
-          subtitle='Informations about your objectif'
+          subtitle='Informations about your favorites food'
           icon={favoritesIcon}
         >
           <SettingItem
@@ -109,21 +109,21 @@ export default class Settings extends Component {
             dataInput='Peas'
             dataType='default'
             navigation={navigation}
-            favouriteType
+            favoriteType
           />
           <SettingItem
             dataLabel='Fruit'
             dataInput='Kiwi'
             dataType='default'
             navigation={navigation}
-            favouriteType
+            favoriteType
           />
           <SettingItem
             dataLabel='Meat'
             dataInput='Beef'
             dataType='default'
             navigation={navigation}
-            favouriteType
+            favoriteType
           />
         </SettingsContent>
         <TouchableOpacity
