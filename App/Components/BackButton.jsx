@@ -1,26 +1,19 @@
 import React from 'react';
-import { StyleSheet, View, Platform } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 import colors from '../Constants/colors';
 
 const styles = StyleSheet.create({
   container: {
-    width: 40,
-    height: 40,
+    width: 35,
+    height: 35,
     borderRadius: 50,
     opacity: 0.9,
     position: 'relative',
     backgroundColor: colors.green,
     justifyContent: 'center',
     alignItems: 'center',
-    ...Platform.select({
-      ios: {
-        marginTop: 40,
-      },
-      android: {
-        marginTop: 10,
-      },
-    }),
+    marginTop: 10,
   },
 });
 
