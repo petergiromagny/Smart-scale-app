@@ -89,7 +89,7 @@ export default function RecipeItem({ data, navigation, horizontal }) {
     return (
       <TouchableOpacity
         style={styles.containerHorizontal}
-        onPress={() => navigation.navigate('RecipeDetailHome', { recipe })}
+        onPress={() => navigation.navigate('RecipeDetail', { recipe })}
       >
         <View>
           <Image
