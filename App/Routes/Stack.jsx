@@ -68,7 +68,7 @@ export const HomeStack = () => (
       options={{ title: '' }}
       component={Home}
     />
-    <ScanStackNavigator.Screen
+    <HomeStackNavigator.Screen
       name='ScanResult'
       options={{
         title: 'Scan Result',
@@ -78,12 +78,28 @@ export const HomeStack = () => (
       }}
       component={ScanResultScreen}
     />
-    <RecipesStackNavigator.Screen
-      name='RecipeDetailHome'
+    <HomeStackNavigator.Screen
+      name='Recipes'
+      options={{
+        title: 'Recipes',
+        headerTransparent: true,
+        headerTruncatedBackTitle: '',
+        headerTitleStyle: headerTitleStyle(),
+        headerBackImage: () => <BackButton />,
+        headerLeft: (props) => (
+          <HeaderBackButton {...props} style={{ marginHorizontal: 0 }} />
+        ),
+        gestureEnabled: true,
+      }}
+      component={Recipes}
+    />
+    <HomeStackNavigator.Screen
+      name='RecipeDetail'
       options={() => ({
         title: '',
         headerTransparent: true,
         headerTruncatedBackTitle: '',
+        headerBackTitle: '',
         headerBackImage: () => <BackButton />,
         headerLeft: (props) => (
           <HeaderBackButton {...props} style={{ marginHorizontal: 0 }} />
@@ -91,6 +107,36 @@ export const HomeStack = () => (
         gestureEnabled: true,
       })}
       component={RecipeDetailScreen}
+    />
+    <HomeStackNavigator.Screen
+      name='Meals'
+      options={{
+        title: 'Last Meals',
+        headerTransparent: true,
+        headerTruncatedBackTitle: '',
+        headerTitleStyle: headerTitleStyle(),
+        headerBackImage: () => <BackButton />,
+        headerLeft: (props) => (
+          <HeaderBackButton {...props} style={{ marginTop: 0 }} />
+        ),
+        gestureEnabled: true,
+      }}
+      component={Meals}
+    />
+    <HomeStackNavigator.Screen
+      name='MealDetailScreen'
+      options={() => ({
+        title: '',
+        headerTransparent: true,
+        headerTruncatedBackTitle: '',
+        headerBackTitle: '',
+        headerBackImage: () => <BackButton />,
+        headerLeft: (props) => (
+          <HeaderBackButton {...props} style={{ marginHorizontal: 0 }} />
+        ),
+        gestureEnabled: true,
+      })}
+      component={MealDetailScreen}
     />
   </HomeStackNavigator.Navigator>
 );
