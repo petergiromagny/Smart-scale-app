@@ -69,7 +69,7 @@ export default function ScanButton({ navigation }) {
       <Modal transparent animationType='fade' visible={modalVisible}>
         <View style={styles.modalContainer}>
           <View style={styles.modal}>
-            <ScanningAnimation radius={width / 3.5} />
+            <ScanningAnimation radius={width / 3} />
             <TouchableOpacity onPress={() => handleDisplayScanResult()}>
               <Text>Close modal</Text>
             </TouchableOpacity>
