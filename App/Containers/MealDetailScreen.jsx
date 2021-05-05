@@ -9,7 +9,6 @@ import Donut from '../Components/Donut';
 import fatsIcon from '../Assets/Images/fatsIcon.png';
 import carbsIcon from '../Assets/Images/carbsIcon.png';
 import proteinsIcon from '../Assets/Images/proteinsIcon.png';
-// import CloseButton from '../Components/CloseButton';
 
 const styles = StyleSheet.create({
   container: {
@@ -84,6 +83,7 @@ export default class MealDetailScreen extends Component {
               color={colors.orange}
               radius={100}
               strokeWidth={15}
+              donutAnimated
             />
           </View>
           <View style={styles.nutritionInfo}>
