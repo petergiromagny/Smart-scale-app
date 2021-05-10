@@ -6,6 +6,7 @@ import {
   Platform,
   StatusBar,
 } from 'react-native';
+import { Provider } from 'react-redux';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import * as Font from 'expo-font';
 
@@ -23,6 +24,11 @@ import PopBold from './Assets/Font/Poppins-Bold.ttf';
  */
 import colors from './Constants/colors';
 import Main from './Routes/Main';
+
+/**
+ * @import Redux Store
+ */
+import store from './Redux';
 
 const styles = StyleSheet.create({
   container: {
@@ -71,15 +77,17 @@ export default class App extends Component {
     }
 
     return (
-      <SafeAreaProvider style={styles.container}>
-        <StatusBar
-          barStyle={
-            Platform.OS === 'android' ? 'light-content' : 'dark-content'
-          }
-          translucent
-        />
-        <Main />
-      </SafeAreaProvider>
+      <Provider store={store}>
+        <SafeAreaProvider style={styles.container}>
+          <StatusBar
+            barStyle={
+              Platform.OS === 'android' ? 'light-content' : 'dark-content'
+            }
+            translucent
+          />
+          <Main />
+        </SafeAreaProvider>
+      </Provider>
     );
   }
 }

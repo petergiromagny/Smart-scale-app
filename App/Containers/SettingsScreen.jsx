@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
+import { connect } from 'react-redux';
 import SettingsContent from '../Components/SettingsContent';
 
 import settingsIcon from '../Assets/Images/settingsWIcon.png';
@@ -42,12 +43,12 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class Settings extends Component {
+class Settings extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      // Add State
+      // Add states
     };
   }
 
@@ -58,7 +59,7 @@ export default class Settings extends Component {
   }
 
   render() {
-    const { navigation } = this.props;
+    const { navigation, calory } = this.props;
     return (
       <ScrollView style={styles.container}>
         <SettingsContent
@@ -87,14 +88,28 @@ export default class Settings extends Component {
           />
         </SettingsContent>
         <SettingsContent
-          title='Objectives'
-          subtitle='Informations about your objectives'
+          title='Personnal informations'
+          subtitle='Informations about you'
           icon={targetIcon}
         >
           <SettingItem
             dataLabel='Calories'
-            dataInput='1580'
+            dataInput={calory}
             maxNumber={4}
+            dataType='number-pad'
+            navigation={navigation}
+          />
+          <SettingItem
+            dataLabel='Weight'
+            dataInput={calory}
+            maxNumber={3}
+            dataType='number-pad'
+            navigation={navigation}
+          />
+          <SettingItem
+            dataLabel='Height'
+            dataInput={calory}
+            maxNumber={3}
             dataType='number-pad'
             navigation={navigation}
           />
@@ -137,3 +152,7 @@ export default class Settings extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => ({ calory: state.calory.objective });
+
+export default connect(mapStateToProps)(Settings);

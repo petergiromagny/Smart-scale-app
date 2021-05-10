@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   Text,
   StyleSheet,
@@ -11,6 +12,8 @@ import {
 import InputAuth from '../Components/InputAuth';
 
 import colors from '../Constants/colors';
+
+import { addAction } from '../Redux/Actions/caloryAction';
 
 const styles = StyleSheet.create({
   container: {
@@ -79,7 +82,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class StepObjScreen extends Component {
+class StepObjScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -88,9 +91,11 @@ export default class StepObjScreen extends Component {
   }
 
   handleSubmitStepObj() {
-    const { navigation } = this.props;
+    const { navigation, dispatch } = this.props;
     const { calories } = this.state;
-    console.log(`Calories: ${calories}`);
+
+    dispatch(addAction(calories));
+
     navigation.navigate('StepFav');
   }
 
@@ -134,3 +139,7 @@ export default class StepObjScreen extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => ({ calory: state.calory });
+
+export default connect(mapStateToProps)(StepObjScreen);

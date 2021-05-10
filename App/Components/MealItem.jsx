@@ -6,13 +6,14 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { connect } from 'react-redux';
 
 import colors from '../Constants/colors';
 import Donut from './Donut';
 
 const { width } = Dimensions.get('screen');
 
-const OBJ_KCAL = 1850;
+// const OBJ_KCAL = 1850;
 
 const styles = StyleSheet.create({
   itemContainerHome: {
@@ -106,8 +107,10 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function MealItem({ dataItem, navigation, mealScreen }) {
+const MealItem = ({ dataItem, navigation, mealScreen, calory }) => {
   const { item } = dataItem;
+
+  const OBJ_KCAL = parseInt(calory, 10);
 
   return (
     <TouchableOpacity
@@ -147,4 +150,10 @@ export default function MealItem({ dataItem, navigation, mealScreen }) {
       </View>
     </TouchableOpacity>
   );
-}
+};
+
+const mapStateToProps = (state) => ({
+  calory: state.calory.objective,
+});
+
+export default connect(mapStateToProps)(MealItem);

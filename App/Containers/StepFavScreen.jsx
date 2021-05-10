@@ -89,12 +89,12 @@ export default class StepObjScreen extends Component {
   }
 
   handleSubmitStepFav() {
-    // const { navigation } = this.props;
+    const { navigation } = this.props;
     const { vegetables, fruits, meat } = this.state;
     console.log(`Vegetables: ${vegetables}`);
     console.log(`Fruits: ${fruits}`);
     console.log(`Meat: ${meat}`);
-    // navigation.replace('Drawer');
+    navigation.replace('Drawer');
   }
 
   render() {
