@@ -6,6 +6,7 @@ import {
   TouchableWithoutFeedback,
   TouchableOpacity,
   Keyboard,
+  KeyboardAvoidingView,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -92,58 +93,60 @@ export default class SignInScreen extends Component {
         style={styles.dismissKeyboard}
       >
         <View style={styles.container}>
-          <View style={styles.header}>
-            <Text style={styles.title}>Smart Scale</Text>
-            <Text style={styles.subtitle}>
-              Login to your personal Smart Scale
-            </Text>
-          </View>
+          <KeyboardAvoidingView behavior='position'>
+            <View style={styles.header}>
+              <Text style={styles.title}>Smart Scale</Text>
+              <Text style={styles.subtitle}>
+                Login to your personal Smart Scale
+              </Text>
+            </View>
 
-          <InputAuth
-            label='E-Mail'
-            placeholder='youremail@gmail.com'
-            textContentType='emailAddress'
-            keyboardType='email-address'
-            autoCorrect={false}
-            spellCheck={false}
-            autoCapitalize='none'
-            onChangeText={(value) => this.setState({ email: value })}
-            icon={
-              <Ionicons name='mail-outline' size={24} color={colors.dark} />
-            }
-          />
+            <InputAuth
+              label='E-Mail'
+              placeholder='youremail@gmail.com'
+              textContentType='emailAddress'
+              keyboardType='email-address'
+              autoCorrect={false}
+              spellCheck={false}
+              autoCapitalize='none'
+              onChangeText={(value) => this.setState({ email: value })}
+              icon={
+                <Ionicons name='mail-outline' size={24} color={colors.dark} />
+              }
+            />
 
-          <InputAuth
-            label='Password'
-            placeholder='•••••••••••'
-            textContentType='password'
-            secureTextEntry
-            keyboardType='default'
-            onChangeText={(value) => this.setState({ password: value })}
-            icon={
-              <Ionicons
-                name='lock-closed-outline'
-                size={24}
-                color={colors.dark}
-              />
-            }
-          />
+            <InputAuth
+              label='Password'
+              placeholder='•••••••••••'
+              textContentType='password'
+              secureTextEntry
+              keyboardType='default'
+              onChangeText={(value) => this.setState({ password: value })}
+              icon={
+                <Ionicons
+                  name='lock-closed-outline'
+                  size={24}
+                  color={colors.dark}
+                />
+              }
+            />
 
-          <TouchableOpacity
-            style={styles.signInButton}
-            onPress={() => this.handleSubmitSignIn()}
-          >
-            <Text style={styles.signInButtonText}>Sign in</Text>
-          </TouchableOpacity>
-
-          <View style={styles.newUser}>
-            <Text style={styles.text}>I&apos;m new user.</Text>
-            <TouchableWithoutFeedback
-              onPress={() => navigation.navigate('SignUp')}
+            <TouchableOpacity
+              style={styles.signInButton}
+              onPress={() => this.handleSubmitSignIn()}
             >
-              <Text style={styles.textButton}>Sign Up</Text>
-            </TouchableWithoutFeedback>
-          </View>
+              <Text style={styles.signInButtonText}>Sign in</Text>
+            </TouchableOpacity>
+
+            <View style={styles.newUser}>
+              <Text style={styles.text}>I&apos;m new user.</Text>
+              <TouchableWithoutFeedback
+                onPress={() => navigation.navigate('SignUp')}
+              >
+                <Text style={styles.textButton}>Sign Up</Text>
+              </TouchableWithoutFeedback>
+            </View>
+          </KeyboardAvoidingView>
         </View>
       </TouchableWithoutFeedback>
     );

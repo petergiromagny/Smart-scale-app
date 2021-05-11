@@ -6,7 +6,10 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   TouchableOpacity,
+  ScrollView,
+  KeyboardAvoidingView,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Ionicons } from '@expo/vector-icons';
 
@@ -18,11 +21,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
+  },
+  scrollView: {
+    flexGrow: 1,
     justifyContent: 'center',
-    paddingHorizontal: 50,
   },
   dismissKeyboard: {
     flex: 1,
+  },
+  containerForm: {
+    flex: 1,
+    justifyContent: 'center',
+    paddingHorizontal: 50,
   },
   header: {
     marginBottom: 30,
@@ -89,95 +99,115 @@ export default class SignUpScreen extends Component {
 
   render() {
     const { navigation } = this.props;
-
     return (
-      <TouchableWithoutFeedback
-        onPress={() => Keyboard.dismiss()}
-        style={styles.dismissKeyboard}
-      >
-        <View style={styles.container}>
-          <View style={styles.header}>
-            <Text style={styles.title}>Smart Scale</Text>
-            <Text style={styles.subtitle}>Become a Smart Scale member</Text>
-          </View>
-
-          <InputAuth
-            label='Name'
-            placeholder='Your name'
-            textContentType='name'
-            keyboardType='default'
-            spellCheck={false}
-            onChangeText={(value) => this.setState({ name: value })}
-            icon={
-              <Ionicons name='person-outline' size={24} color={colors.dark} />
-            }
-          />
-
-          <InputAuth
-            label='E-Mail'
-            placeholder='youremail@gmail.com'
-            textContentType='emailAddress'
-            keyboardType='email-address'
-            autoCorrect={false}
-            spellCheck={false}
-            autoCapitalize='none'
-            onChangeText={(value) => this.setState({ email: value })}
-            icon={
-              <Ionicons name='mail-outline' size={24} color={colors.dark} />
-            }
-          />
-
-          <InputAuth
-            label='Password'
-            placeholder='•••••••••••'
-            textContentType='password'
-            secureTextEntry
-            keyboardType='default'
-            spellCheck={false}
-            onChangeText={(value) => this.setState({ password: value })}
-            icon={
-              <Ionicons
-                name='lock-closed-outline'
-                size={24}
-                color={colors.dark}
-              />
-            }
-          />
-
-          <InputAuth
-            label='Confirm your password'
-            placeholder='•••••••••••'
-            textContentType='password'
-            secureTextEntry
-            keyboardType='default'
-            spellCheck={false}
-            onChangeText={(value) => this.setState({ confPassword: value })}
-            icon={
-              <Ionicons
-                name='lock-closed-outline'
-                size={24}
-                color={colors.dark}
-              />
-            }
-          />
-
-          <TouchableOpacity
-            style={styles.signInButton}
-            onPress={() => this.handleSubmitSignUp()}
+      <SafeAreaView style={styles.container}>
+        <ScrollView
+          contentContainerStyle={styles.scrollView}
+          scrollEnabled={false}
+        >
+          <TouchableWithoutFeedback
+            onPress={() => Keyboard.dismiss()}
+            style={styles.dismissKeyboard}
           >
-            <Text style={styles.signInButtonText}>Sign up</Text>
-          </TouchableOpacity>
+            <KeyboardAvoidingView behavior='position'>
+              <View style={styles.containerForm}>
+                <View style={styles.header}>
+                  <Text style={styles.title}>Smart Scale</Text>
+                  <Text style={styles.subtitle}>
+                    Become a Smart Scale member
+                  </Text>
+                </View>
 
-          <View style={styles.newUser}>
-            <Text style={styles.text}>I&apos;m already a member.</Text>
-            <TouchableWithoutFeedback
-              onPress={() => navigation.navigate('SignIn')}
-            >
-              <Text style={styles.textButton}>Sign In</Text>
-            </TouchableWithoutFeedback>
-          </View>
-        </View>
-      </TouchableWithoutFeedback>
+                <InputAuth
+                  label='Name'
+                  placeholder='Your name'
+                  textContentType='name'
+                  keyboardType='default'
+                  spellCheck={false}
+                  onChangeText={(value) => this.setState({ name: value })}
+                  icon={
+                    <Ionicons
+                      name='person-outline'
+                      size={24}
+                      color={colors.dark}
+                    />
+                  }
+                />
+
+                <InputAuth
+                  label='E-Mail'
+                  placeholder='youremail@gmail.com'
+                  textContentType='emailAddress'
+                  keyboardType='email-address'
+                  autoCorrect={false}
+                  spellCheck={false}
+                  autoCapitalize='none'
+                  onChangeText={(value) => this.setState({ email: value })}
+                  icon={
+                    <Ionicons
+                      name='mail-outline'
+                      size={24}
+                      color={colors.dark}
+                    />
+                  }
+                />
+
+                <InputAuth
+                  label='Password'
+                  placeholder='•••••••••••'
+                  textContentType='password'
+                  secureTextEntry
+                  keyboardType='default'
+                  spellCheck={false}
+                  onChangeText={(value) => this.setState({ password: value })}
+                  icon={
+                    <Ionicons
+                      name='lock-closed-outline'
+                      size={24}
+                      color={colors.dark}
+                    />
+                  }
+                />
+
+                <InputAuth
+                  label='Confirm your password'
+                  placeholder='•••••••••••'
+                  textContentType='password'
+                  secureTextEntry
+                  keyboardType='default'
+                  spellCheck={false}
+                  onChangeText={(value) =>
+                    this.setState({ confPassword: value })
+                  }
+                  icon={
+                    <Ionicons
+                      name='lock-closed-outline'
+                      size={24}
+                      color={colors.dark}
+                    />
+                  }
+                />
+
+                <TouchableOpacity
+                  style={styles.signInButton}
+                  onPress={() => this.handleSubmitSignUp()}
+                >
+                  <Text style={styles.signInButtonText}>Sign up</Text>
+                </TouchableOpacity>
+
+                <View style={styles.newUser}>
+                  <Text style={styles.text}>I&apos;m already a member.</Text>
+                  <TouchableWithoutFeedback
+                    onPress={() => navigation.navigate('SignIn')}
+                  >
+                    <Text style={styles.textButton}>Sign In</Text>
+                  </TouchableWithoutFeedback>
+                </View>
+              </View>
+            </KeyboardAvoidingView>
+          </TouchableWithoutFeedback>
+        </ScrollView>
+      </SafeAreaView>
     );
   }
 }
