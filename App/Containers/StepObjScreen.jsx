@@ -7,6 +7,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   TouchableOpacity,
+  KeyboardAvoidingView,
 } from 'react-native';
 
 import InputAuth from '../Components/InputAuth';
@@ -32,6 +33,8 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   inputKcal: {
+    position: 'absolute',
+    right: 20,
     fontFamily: 'PoppinsMedium',
     color: colors.green,
   },
@@ -107,33 +110,60 @@ class StepObjScreen extends Component {
         style={styles.dismissKeyboard}
       >
         <View style={styles.container}>
-          <Text style={styles.title}>Your daily calorie objective</Text>
-          <InputAuth
-            label=''
-            placeholder='2000'
-            textContentType='none'
-            keyboardType='number-pad'
-            textAlign='center'
-            autoCorrect={false}
-            spellCheck={false}
-            icon={<Text style={styles.inputKcal}>Kcal</Text>}
-            maxLength={4}
-            onChangeText={(value) => this.setState({ calories: value })}
-          />
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity
-              style={styles.backButton}
-              onPress={() => navigation.goBack()}
-            >
-              <Text style={styles.backButtonText}>Back</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.nextButton}
-              onPress={() => this.handleSubmitStepObj()}
-            >
-              <Text style={styles.nextButtonText}>Next</Text>
-            </TouchableOpacity>
-          </View>
+          <KeyboardAvoidingView behavior='position'>
+            <Text style={styles.title}>Tell us more about yourself...</Text>
+            <InputAuth
+              label='Height'
+              placeholder='170'
+              textContentType='none'
+              keyboardType='number-pad'
+              textAlign='center'
+              autoCorrect={false}
+              spellCheck={false}
+              icon={<Text style={styles.inputKcal}>cm</Text>}
+              maxLength={3}
+              onChangeText={(value) => this.setState({ calories: value })}
+            />
+            <InputAuth
+              label='Weight'
+              placeholder='80'
+              textContentType='none'
+              keyboardType='number-pad'
+              textAlign='center'
+              autoCorrect={false}
+              spellCheck={false}
+              icon={<Text style={styles.inputKcal}>kg</Text>}
+              maxLength={3}
+              onChangeText={(value) => this.setState({ calories: value })}
+            />
+            <InputAuth
+              label='Objective weight'
+              placeholder='75'
+              textContentType='none'
+              keyboardType='number-pad'
+              textAlign='center'
+              autoCorrect={false}
+              spellCheck={false}
+              icon={<Text style={styles.inputKcal}>kg</Text>}
+              maxLength={3}
+              onChangeText={(value) => this.setState({ calories: value })}
+            />
+
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity
+                style={styles.backButton}
+                onPress={() => navigation.goBack()}
+              >
+                <Text style={styles.backButtonText}>Back</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.nextButton}
+                onPress={() => this.handleSubmitStepObj()}
+              >
+                <Text style={styles.nextButtonText}>Next</Text>
+              </TouchableOpacity>
+            </View>
+          </KeyboardAvoidingView>
         </View>
       </TouchableWithoutFeedback>
     );

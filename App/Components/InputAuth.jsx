@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
   textInput: {
     height: 30,
     flex: 5,
+    position: 'relative',
   },
 });
 
