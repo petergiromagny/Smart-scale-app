@@ -14,7 +14,7 @@ import InputAuth from '../Components/InputAuth';
 
 import colors from '../Constants/colors';
 
-import { addAction } from '../Redux/Actions/caloryAction';
+import { addObjAction } from '../Redux/Actions/objAction';
 
 const styles = StyleSheet.create({
   container: {
@@ -89,15 +89,17 @@ class StepObjScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      calories: '',
+      height: '',
+      weight: '',
+      objWeight: '',
     };
   }
 
   handleSubmitStepObj() {
     const { navigation, dispatch } = this.props;
-    const { calories } = this.state;
+    const { height, weight, objWeight } = this.state;
 
-    dispatch(addAction(calories));
+    dispatch(addObjAction(height, weight, objWeight));
 
     navigation.navigate('StepFav');
   }
@@ -122,7 +124,7 @@ class StepObjScreen extends Component {
               spellCheck={false}
               icon={<Text style={styles.inputKcal}>cm</Text>}
               maxLength={3}
-              onChangeText={(value) => this.setState({ calories: value })}
+              onChangeText={(value) => this.setState({ height: value })}
             />
             <InputAuth
               label='Weight'
@@ -134,7 +136,7 @@ class StepObjScreen extends Component {
               spellCheck={false}
               icon={<Text style={styles.inputKcal}>kg</Text>}
               maxLength={3}
-              onChangeText={(value) => this.setState({ calories: value })}
+              onChangeText={(value) => this.setState({ weight: value })}
             />
             <InputAuth
               label='Objective weight'
@@ -146,7 +148,7 @@ class StepObjScreen extends Component {
               spellCheck={false}
               icon={<Text style={styles.inputKcal}>kg</Text>}
               maxLength={3}
-              onChangeText={(value) => this.setState({ calories: value })}
+              onChangeText={(value) => this.setState({ objWeight: value })}
             />
 
             <View style={styles.buttonContainer}>

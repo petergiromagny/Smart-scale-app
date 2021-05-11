@@ -1,11 +1,11 @@
 import { createStore, combineReducers } from 'redux';
 
-import caloryReducer from './Reducers/caloryReducer';
+import objReducer from './Reducers/objReducer';
 import favoritesReducer from './Reducers/favoritesReducer';
 
 const store = createStore(
   combineReducers({
-    calory: caloryReducer,
+    objectives: objReducer,
     favorites: favoritesReducer,
   })
 );
