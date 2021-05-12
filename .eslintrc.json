@@ -18,7 +18,7 @@
     "operator-linebreak": [
       "error",
       "before",
-      { "overrides": { "=": "after" } }
+      { "overrides": { "=": "after", "*": "after" } }
     ],
     "brace-style": ["error", "1tbs"],
     "object-curly-newline": [
