@@ -18,6 +18,7 @@ import SignIn from '../Containers/SignInScreen';
 import SignUp from '../Containers/SignUpScreen';
 import StepObj from '../Containers/StepObjScreen';
 import StepFav from '../Containers/StepFavScreen';
+import StepPers from '../Containers/StepPersScreen';
 
 import Avatar from '../Components/Avatar';
 import Hamburger from '../Components/Hamburger';
@@ -255,6 +256,11 @@ export const AuthStack = () => (
       name='StepObj'
       options={{ title: '' }}
       component={StepObj}
+    />
+    <AuthStackNavigator.Screen
+      name='StepPers'
+      options={{ title: '' }}
+      component={StepPers}
     />
     <AuthStackNavigator.Screen
       name='StepFav'

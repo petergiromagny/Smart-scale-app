@@ -15,6 +15,7 @@ import InputAuth from '../Components/InputAuth';
 import colors from '../Constants/colors';
 
 import { addObjAction } from '../Redux/Actions/objAction';
+import CalculateCalorie from '../Utils/CalculateCalorie';
 
 const styles = StyleSheet.create({
   container: {
@@ -89,6 +90,7 @@ class StepObjScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      age: '',
       height: '',
       weight: '',
       objWeight: '',
@@ -97,11 +99,11 @@ class StepObjScreen extends Component {
 
   handleSubmitStepObj() {
     const { navigation, dispatch } = this.props;
-    const { height, weight, objWeight } = this.state;
+    const { height, weight, objWeight, age } = this.state;
 
-    dispatch(addObjAction(height, weight, objWeight));
+    // dispatch(addObjAction(height, weight, objWeight, objCalorie, age, gender));
 
-    navigation.navigate('StepFav');
+    navigation.navigate('StepPers', { height, weight, objWeight, age });
   }
 
   render() {
@@ -149,6 +151,18 @@ class StepObjScreen extends Component {
               icon={<Text style={styles.inputKcal}>kg</Text>}
               maxLength={3}
               onChangeText={(value) => this.setState({ objWeight: value })}
+            />
+
+            <InputAuth
+              label='Age'
+              placeholder='35'
+              textContentType='none'
+              keyboardType='number-pad'
+              textAlign='center'
+              autoCorrect={false}
+              spellCheck={false}
+              maxLength={2}
+              onChangeText={(value) => this.setState({ age: value })}
             />
 
             <View style={styles.buttonContainer}>

@@ -5,15 +5,25 @@ import {
   ADD_OBJ,
 } from '../Actions/objAction';
 
-const initialState = [{ height: 0 }, { weight: 0 }, { objWeight: 0 }];
+const initialState = [
+  { age: 0 },
+  { gender: 0 },
+  { height: 0 },
+  { weight: 0 },
+  { objWeight: 0 },
+  { objCalorie: 0 },
+];
 
 function objReducer(state = initialState, action) {
   switch (action.type) {
     case ADD_OBJ:
       return {
+        age: action.age,
+        gender: action.gender,
         height: action.height,
         weight: action.weight,
         objWeight: action.objWeight,
+        objCalorie: action.objCalorie,
       };
     case EDIT_HEIGHT:
       return {

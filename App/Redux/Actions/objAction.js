@@ -3,11 +3,21 @@ export const EDIT_HEIGHT = 'height/edit';
 export const EDIT_WEIGHT = 'weight/edit';
 export const EDIT_OBJ_WEIGHT = 'objWeight/edit';
 
-export const addObjAction = (height, weight, objWeight) => ({
+export const addObjAction = (
+  height,
+  weight,
+  objWeight,
+  objCalorie,
+  age,
+  gender
+) => ({
   type: ADD_OBJ,
   height,
   weight,
   objWeight,
+  objCalorie,
+  age,
+  gender,
 });
 
 export const editHeightAction = (val) => ({
