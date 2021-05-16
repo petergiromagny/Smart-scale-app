@@ -8,9 +8,14 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
+import { connect } from 'react-redux';
+import { addObjAction } from '../Redux/Actions/objAction';
+
 import SettingItem from '../Components/SettingItem';
 
 import colors from '../Constants/colors';
+
+import CalculateCalorie from '../Utils/CalculateCalorie';
 
 const styles = StyleSheet.create({
   container: {
@@ -77,24 +82,35 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class StepObjScreen extends Component {
+class StepFavScreen extends Component {
   constructor(props) {
     super(props);
     this.navigation = this.props;
-    this.state = {
-      vegetables: [],
-      fruits: [],
-      meat: [],
-    };
+  }
+
+  componentDidMount() {
+    const { route, dispatch } = this.props;
+    const { height, weight, objWeight, gender, age } = route.params;
+
+    const physicalActivity = 'light';
+
+    const objCalorie = CalculateCalorie(
+      gender,
+      weight,
+      height,
+      age,
+      physicalActivity
+    );
+
+    dispatch(addObjAction(height, weight, objWeight, objCalorie, age, gender));
   }
 
   handleSubmitStepFav() {
-    const { navigation } = this.props;
-    const { vegetables, fruits, meat } = this.state;
-    console.log(`Vegetables: ${vegetables}`);
-    console.log(`Fruits: ${fruits}`);
-    console.log(`Meat: ${meat}`);
-    navigation.replace('Drawer');
+    const { navigation, allState } = this.props;
+
+    console.log(allState);
+
+    // navigation.replace('Drawer');
   }
 
   render() {
@@ -110,14 +126,12 @@ export default class StepObjScreen extends Component {
           <SettingItem
             dataLabel='Vegetable'
             dataType='default'
-            dataInput=''
             navigation={navigation}
             favoriteType
             stepSignUp
           />
           <SettingItem
             dataLabel='Fruit'
-            dataInput=''
             dataType='default'
             navigation={navigation}
             favoriteType
@@ -125,7 +139,6 @@ export default class StepObjScreen extends Component {
           />
           <SettingItem
             dataLabel='Meat'
-            dataInput=''
             dataType='default'
             navigation={navigation}
             favoriteType
@@ -151,3 +164,7 @@ export default class StepObjScreen extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => ({ allState: state });
+
+export default connect(mapStateToProps)(StepFavScreen);

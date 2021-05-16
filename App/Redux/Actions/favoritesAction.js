@@ -1,6 +1,18 @@
-export const ADD_FRUITS = 'fruits/add';
-export const EDIT_FRUITS = 'fruits/edit';
-export const ADD_VEGETABLES = 'vegetables/add';
-export const EDIT_VEGETABLES = 'vegetables/edit';
-export const ADD_MEATS = 'meats/add';
-export const EDIT_MEATS = 'meats/edit';
+export const TOGGLE_VEGETABLES = 'vegetables/toggle';
+export const TOGGLE_FRUITS = 'fruits/toggle';
+export const TOGGLE_MEATS = 'meats/toggle';
+
+export const toggleVegetables = (payload) => ({
+  type: TOGGLE_VEGETABLES,
+  payload,
+});
+
+export const toggleFruits = (payload) => ({
+  type: TOGGLE_FRUITS,
+  payload,
+});
+
+export const toggleMeats = (payload) => ({
+  type: TOGGLE_MEATS,
+  payload,
+});

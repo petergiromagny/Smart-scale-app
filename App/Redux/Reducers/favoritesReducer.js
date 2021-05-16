@@ -1,43 +1,28 @@
 import {
-  ADD_FRUITS,
-  EDIT_FRUITS,
-  ADD_VEGETABLES,
-  EDIT_VEGETABLES,
-  ADD_MEATS,
-  EDIT_MEATS,
+  TOGGLE_FRUITS,
+  TOGGLE_VEGETABLES,
+  TOGGLE_MEATS,
 } from '../Actions/favoritesAction';
 
-const initialState = [
-  { fruits: ['strawberry', 'apple', 'banana'] },
-  { vegetables: ['broccoli', 'cucumber'] },
-  { meats: ['beef', 'turkey', 'chicken'] },
-];
+const initialState = { vegetables: [], fruits: [], meats: [] };
 
 export default (state = initialState, action) => {
+  const { payload } = action;
   switch (action.type) {
-    case ADD_FRUITS:
+    case TOGGLE_FRUITS:
       return {
-        fruits: action.payload,
+        ...state,
+        fruits: payload,
       };
-    case EDIT_FRUITS:
+    case TOGGLE_VEGETABLES:
       return {
-        fruits: [...state, action.payload],
+        ...state,
+        vegetables: payload,
       };
-    case ADD_VEGETABLES:
+    case TOGGLE_MEATS:
       return {
-        vegetables: action.payload,
-      };
-    case EDIT_VEGETABLES:
-      return {
-        vegetables: [...state, action.payload],
-      };
-    case ADD_MEATS:
-      return {
-        meats: action.payload,
-      };
-    case EDIT_MEATS:
-      return {
-        meats: [...state, action.payload],
+        ...state,
+        meats: payload,
       };
 
     default:

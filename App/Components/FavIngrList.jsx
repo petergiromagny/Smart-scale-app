@@ -10,11 +10,19 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Svg, { Circle } from 'react-native-svg';
 
+import { connect } from 'react-redux';
 import colors from '../Constants/colors';
 
 // Import data
 import fruit from '../Data/fruit.json';
 import vegetable from '../Data/vegetable.json';
+import meats from '../Data/meat.json';
+
+import {
+  toggleVegetables,
+  toggleFruits,
+  toggleMeats,
+} from '../Redux/Actions/favoritesAction';
 
 const styles = StyleSheet.create({
   container: {
@@ -65,7 +73,15 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function FavIngrList({ label, navigation, data }) {
+function FavIngrList({
+  label,
+  navigation,
+  data,
+  dispatch,
+  vegetablesSelected,
+  fruitsSelected,
+  meatsSelected,
+}) {
   /**
    * @var dataSet : all favorite by type of food
    * @var dataSelected : all favorites food selected
@@ -77,10 +93,13 @@ export default function FavIngrList({ label, navigation, data }) {
   useEffect(() => {
     if (label.toLowerCase() === 'fruit') {
       setDataSet(fruit);
+      setDataSelected(fruitsSelected);
     } else if (label.toLowerCase() === 'vegetable') {
       setDataSet(vegetable);
+      setDataSelected(vegetablesSelected);
     } else if (label.toLowerCase() === 'meat') {
-      setDataSet('futur meat list');
+      setDataSet(meats);
+      setDataSelected(meatsSelected);
     }
   }, []);
 
@@ -97,19 +116,27 @@ export default function FavIngrList({ label, navigation, data }) {
     if (dataSelected.includes(item)) {
       const dataSelectedFiltered = dataSelected.filter((i) => i !== item);
       setDataSelected(dataSelectedFiltered);
-    } else if (!dataSelected.includes(item)) {
+    } else {
       setDataSelected((actualData) => [...actualData, item]);
     }
   };
 
   const updateDataSet = () => {
-    console.log(dataSelected);
+    if (label.toLowerCase() === 'fruit') {
+      dispatch(toggleFruits(dataSelected));
+    } else if (label.toLowerCase() === 'vegetable') {
+      dispatch(toggleVegetables(dataSelected));
+    } else if (label.toLowerCase() === 'meat') {
+      dispatch(toggleMeats(dataSelected));
+    }
     navigation.goBack();
   };
 
   // RenderItem component
   const renderItemComponent = ({ item }) => (
-    <TouchableWithoutFeedback onPress={() => handleFavorite(item)}>
+    <TouchableWithoutFeedback
+      onPress={() => handleFavorite(item.toLowerCase())}
+    >
       <View style={styles.item}>
         <Text style={styles.itemText}>
           {item.charAt(0).toUpperCase() + item.slice(1)}
@@ -166,3 +193,11 @@ export default function FavIngrList({ label, navigation, data }) {
     </SafeAreaView>
   );
 }
+
+const mapStateToProps = (state) => ({
+  vegetablesSelected: state.favorites.vegetables,
+  fruitsSelected: state.favorites.fruits,
+  meatsSelected: state.favorites.meats,
+});
+
+export default connect(mapStateToProps)(FavIngrList);

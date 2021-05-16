@@ -86,22 +86,38 @@ export default class StepPersScreen extends Component {
   }
 
   handleSubmitGender(type) {
-    const { gender } = this.state;
     const { navigation, route } = this.props;
     const { height, weight, objWeight, age } = route.params;
 
     if (type === 'male') {
-      this.setState({ gender: type, maleEnabled: true, femaleEnabled: false });
+      this.setState(
+        { gender: type, maleEnabled: true, femaleEnabled: false },
+        () => {
+          const { gender } = this.state;
+          navigation.navigate('StepFav', {
+            height,
+            weight,
+            objWeight,
+            gender,
+            age,
+          });
+        }
+      );
     } else if (type === 'female') {
-      this.setState({ gender: type, femaleEnabled: true, maleEnabled: false });
+      this.setState(
+        { gender: type, femaleEnabled: true, maleEnabled: false },
+        () => {
+          const { gender } = this.state;
+          navigation.navigate('StepFav', {
+            height,
+            weight,
+            objWeight,
+            gender,
+            age,
+          });
+        }
+      );
     }
-    navigation.navigate('StepFav', {
-      height,
-      weight,
-      objWeight,
-      gender,
-      age,
-    });
   }
 
   render() {

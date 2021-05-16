@@ -42,11 +42,6 @@ const styles = StyleSheet.create({
   dataInput: {
     fontFamily: 'PoppinsMedium',
   },
-  dataInputReverse: {
-    fontFamily: 'PoppinsMedium',
-    fontSize: 15,
-    color: colors.background,
-  },
   svgContainer: {
     width: 14,
     height: 14,
@@ -74,22 +69,6 @@ export default function SettingItem({
     return phoneNumber.formatNational();
   };
 
-  const displayDataInButton = (label, values) => {
-    if (dataUpdate) {
-      return (
-        <View style={styles.dataContainer}>
-          <Text style={styles.dataLabelReverse}>{label}</Text>
-          <Text style={styles.dataInputReverse}>{values}</Text>
-        </View>
-      );
-    }
-    return (
-      <View style={styles.dataContainer}>
-        <Text style={styles.dataLabelReverse}>{label}</Text>
-      </View>
-    );
-  };
-
   useEffect(() => {
     if (dataLabel.toLowerCase() === 'phone') {
       const phoneText = formatMobileNumber(dataUpdate);
@@ -111,7 +90,9 @@ export default function SettingItem({
           })
         }
       >
-        {displayDataInButton(dataLabel, dataUpdate)}
+        <View style={styles.dataContainer}>
+          <Text style={styles.dataLabelReverse}>{dataLabel}</Text>
+        </View>
         <View style={styles.svgContainer}>
           <Svg width='100%' height='100%' viewBox='0 0 100 100'>
             <Path
