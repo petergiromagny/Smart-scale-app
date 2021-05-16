@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   ScrollView,
   KeyboardAvoidingView,
+  Alert,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -79,22 +80,29 @@ export default class SignUpScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
+      firstname: '',
+      lastname: '',
       email: '',
       password: '',
-      confPassword: '',
     };
   }
 
   handleSubmitSignUp() {
     // TODO: Add Firebase auth
-    const { name, email, password, confPassword } = this.state;
+    const { firstname, lastname, email, password } = this.state;
     const { navigation } = this.props;
-    console.log(`Name: ${name}`);
+
+    if (firstname && lastname && email && password) {
+      console.log('User created & signed in');
+    } else {
+      Alert.alert('Please be sure to fill all fields');
+    }
+
+    console.log(`Firstname: ${firstname}`);
+    console.log(`Lastname: ${lastname}`);
     console.log(`Email: ${email}`);
     console.log(`Password: ${password}`);
-    console.log(`Confirmation Password: ${confPassword}`);
-    navigation.navigate('StepObj');
+    // navigation.navigate('StepObj');
   }
 
   render() {
@@ -119,12 +127,28 @@ export default class SignUpScreen extends Component {
                 </View>
 
                 <InputAuth
-                  label='Name'
-                  placeholder='Your name'
+                  label='Firstname'
+                  placeholder='Your firstname'
                   textContentType='name'
                   keyboardType='default'
                   spellCheck={false}
-                  onChangeText={(value) => this.setState({ name: value })}
+                  onChangeText={(value) => this.setState({ firstname: value })}
+                  icon={
+                    <Ionicons
+                      name='person-outline'
+                      size={24}
+                      color={colors.dark}
+                    />
+                  }
+                />
+
+                <InputAuth
+                  label='Lastname'
+                  placeholder='Your lastname'
+                  textContentType='name'
+                  keyboardType='default'
+                  spellCheck={false}
+                  onChangeText={(value) => this.setState({ lastname: value })}
                   icon={
                     <Ionicons
                       name='person-outline'
@@ -160,25 +184,6 @@ export default class SignUpScreen extends Component {
                   keyboardType='default'
                   spellCheck={false}
                   onChangeText={(value) => this.setState({ password: value })}
-                  icon={
-                    <Ionicons
-                      name='lock-closed-outline'
-                      size={24}
-                      color={colors.dark}
-                    />
-                  }
-                />
-
-                <InputAuth
-                  label='Confirm your password'
-                  placeholder='•••••••••••'
-                  textContentType='password'
-                  secureTextEntry
-                  keyboardType='default'
-                  spellCheck={false}
-                  onChangeText={(value) =>
-                    this.setState({ confPassword: value })
-                  }
                   icon={
                     <Ionicons
                       name='lock-closed-outline'
