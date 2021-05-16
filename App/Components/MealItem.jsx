@@ -13,8 +13,6 @@ import Donut from './Donut';
 
 const { width } = Dimensions.get('screen');
 
-// const OBJ_KCAL = 1850;
-
 const styles = StyleSheet.create({
   itemContainerHome: {
     marginVertical: 20,
@@ -107,10 +105,8 @@ const styles = StyleSheet.create({
   },
 });
 
-const MealItem = ({ dataItem, navigation, mealScreen, calory }) => {
+const MealItem = ({ dataItem, navigation, mealScreen, calorieObjective }) => {
   const { item } = dataItem;
-
-  const OBJ_KCAL = parseInt(calory, 10);
 
   return (
     <TouchableOpacity
@@ -118,13 +114,13 @@ const MealItem = ({ dataItem, navigation, mealScreen, calory }) => {
       onPress={() =>
         navigation.navigate(mealScreen ? 'MealDetailScreen' : 'MealDetail', {
           item,
-          OBJ_KCAL,
+          calorieObjective,
         })
       }
     >
       <Donut
         kcal={item.kcal}
-        objKcal={OBJ_KCAL}
+        objKcal={calorieObjective}
         color={colors.orange}
         radius={mealScreen ? 50 : 45}
         strokeWidth={10}
@@ -153,7 +149,7 @@ const MealItem = ({ dataItem, navigation, mealScreen, calory }) => {
 };
 
 const mapStateToProps = (state) => ({
-  calory: state.calory.objective,
+  calorieObjective: state.objectives.objCalorie,
 });
 
 export default connect(mapStateToProps)(MealItem);

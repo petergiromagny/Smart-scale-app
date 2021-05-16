@@ -70,7 +70,7 @@ export default class MealDetailScreen extends Component {
 
   render() {
     const { route } = this.props;
-    const { item, OBJ_KCAL } = route.params;
+    const { item, calorieObjective } = route.params;
     const dateFormat = moment(item.date, 'DD/MM/YYYY').format('DD MMM YYYY');
 
     return (
@@ -79,7 +79,7 @@ export default class MealDetailScreen extends Component {
           <View style={styles.donutContainer}>
             <Donut
               kcal={item.kcal}
-              objKcal={OBJ_KCAL}
+              objKcal={calorieObjective}
               color={colors.orange}
               radius={100}
               strokeWidth={15}
