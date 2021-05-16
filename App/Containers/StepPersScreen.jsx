@@ -6,8 +6,9 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   TouchableOpacity,
-  KeyboardAvoidingView,
 } from 'react-native';
+
+import RadioButton from '../Components/RadioButton';
 
 import colors from '../Constants/colors';
 
@@ -25,7 +26,22 @@ const styles = StyleSheet.create({
     fontFamily: 'PoppinsBold',
     fontSize: 30,
     textAlign: 'center',
-    marginBottom: 15,
+    marginBottom: 20,
+  },
+  physicalContainer: {
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    backgroundColor: colors.background,
+    borderRadius: 10,
+    width: '100%',
+    shadowColor: colors.green,
+    shadowOffset: {
+      width: 0,
+      height: 7,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+    elevation: 5,
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -52,11 +68,31 @@ const styles = StyleSheet.create({
     color: colors.green,
     textAlign: 'center',
   },
+  nextButton: {
+    paddingVertical: 13,
+    backgroundColor: colors.green,
+    borderRadius: 10,
+    width: '48%',
+    shadowColor: colors.green,
+    shadowOffset: {
+      width: 0,
+      height: 7,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+    elevation: 5,
+  },
+  nextButtonText: {
+    fontFamily: 'PoppinsMedium',
+    color: colors.background,
+    textTransform: 'uppercase',
+    textAlign: 'center',
+  },
   backButton: {
     paddingVertical: 13,
     backgroundColor: colors.background,
     borderRadius: 10,
-    width: '100%',
+    width: '48%',
     shadowColor: colors.green,
     shadowOffset: {
       width: 0,
@@ -80,100 +116,171 @@ export default class StepPersScreen extends Component {
 
     this.state = {
       gender: '',
+      physicalActivity: '',
       maleEnabled: false,
       femaleEnabled: false,
+      sedentaryEnabled: false,
+      lightEnabled: false,
+      moderateEnabled: false,
+      intenseEnabled: false,
     };
   }
 
-  handleSubmitGender(type) {
+  handleSubmitStepPers() {
+    const { gender, physicalActivity } = this.state;
     const { navigation, route } = this.props;
     const { height, weight, objWeight, age } = route.params;
 
+    navigation.navigate('StepFav', {
+      height,
+      weight,
+      objWeight,
+      gender,
+      physicalActivity,
+      age,
+    });
+  }
+
+  handleGender(type) {
     if (type === 'male') {
-      this.setState(
-        { gender: type, maleEnabled: true, femaleEnabled: false },
-        () => {
-          const { gender } = this.state;
-          navigation.navigate('StepFav', {
-            height,
-            weight,
-            objWeight,
-            gender,
-            age,
-          });
-        }
-      );
+      this.setState({ gender: type, maleEnabled: true, femaleEnabled: false });
     } else if (type === 'female') {
-      this.setState(
-        { gender: type, femaleEnabled: true, maleEnabled: false },
-        () => {
-          const { gender } = this.state;
-          navigation.navigate('StepFav', {
-            height,
-            weight,
-            objWeight,
-            gender,
-            age,
-          });
-        }
-      );
+      this.setState({ gender: type, femaleEnabled: true, maleEnabled: false });
+    }
+  }
+
+  handleRadioCheck(physicalActivity) {
+    switch (physicalActivity) {
+      case 'sedentary':
+        this.setState({
+          sedentaryEnabled: true,
+          lightEnabled: false,
+          moderateEnabled: false,
+          intenseEnabled: false,
+          physicalActivity,
+        });
+        break;
+      case 'light':
+        this.setState({
+          sedentaryEnabled: false,
+          lightEnabled: true,
+          moderateEnabled: false,
+          intenseEnabled: false,
+          physicalActivity,
+        });
+        break;
+      case 'moderate':
+        this.setState({
+          sedentaryEnabled: false,
+          lightEnabled: false,
+          moderateEnabled: true,
+          intenseEnabled: false,
+          physicalActivity,
+        });
+        break;
+      case 'intense':
+        this.setState({
+          sedentaryEnabled: false,
+          lightEnabled: false,
+          moderateEnabled: false,
+          intenseEnabled: true,
+          physicalActivity,
+        });
+        break;
+
+      default:
+        break;
     }
   }
 
   render() {
     const { navigation } = this.props;
-    const { maleEnabled, femaleEnabled } = this.state;
+    const {
+      maleEnabled,
+      femaleEnabled,
+      sedentaryEnabled,
+      lightEnabled,
+      moderateEnabled,
+      intenseEnabled,
+    } = this.state;
     return (
       <TouchableWithoutFeedback
         onPress={() => Keyboard.dismiss()}
         style={styles.dismissKeyboard}
       >
         <View style={styles.container}>
-          <KeyboardAvoidingView behavior='position'>
-            <View style={styles.buttonContainer}>
-              <TouchableOpacity
-                onPress={() => this.handleSubmitGender('male')}
+          <Text style={styles.title}>Your physical activity and gender</Text>
+          <View style={styles.physicalContainer}>
+            <RadioButton
+              text='Sedentary'
+              activeCheck={() => this.handleRadioCheck('sedentary')}
+              checked={sedentaryEnabled}
+            />
+            <RadioButton
+              text='Light'
+              activeCheck={() => this.handleRadioCheck('light')}
+              checked={lightEnabled}
+            />
+            <RadioButton
+              text='Moderate'
+              activeCheck={() => this.handleRadioCheck('moderate')}
+              checked={moderateEnabled}
+            />
+            <RadioButton
+              text='Intense'
+              activeCheck={() => this.handleRadioCheck('intense')}
+              checked={intenseEnabled}
+            />
+          </View>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              onPress={() => this.handleGender('male')}
+              style={[
+                styles.button,
+                maleEnabled && { backgroundColor: colors.green },
+              ]}
+            >
+              <Text
                 style={[
-                  styles.button,
-                  maleEnabled && { backgroundColor: colors.green },
+                  styles.buttonText,
+                  maleEnabled && { color: colors.background },
                 ]}
               >
-                <Text
-                  style={[
-                    styles.buttonText,
-                    maleEnabled && { color: colors.background },
-                  ]}
-                >
-                  Male
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => this.handleSubmitGender('female')}
+                Male
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this.handleGender('female')}
+              style={[
+                styles.button,
+                femaleEnabled && { backgroundColor: colors.green },
+              ]}
+            >
+              <Text
                 style={[
-                  styles.button,
-                  femaleEnabled && { backgroundColor: colors.green },
+                  styles.buttonText,
+                  femaleEnabled && { color: colors.background },
                 ]}
               >
-                <Text
-                  style={[
-                    styles.buttonText,
-                    femaleEnabled && { color: colors.background },
-                  ]}
-                >
-                  Female
-                </Text>
-              </TouchableOpacity>
-            </View>
+                Female
+              </Text>
+            </TouchableOpacity>
+          </View>
 
-            <View style={styles.buttonContainer}>
-              <TouchableOpacity
-                style={styles.backButton}
-                onPress={() => navigation.goBack()}
-              >
-                <Text style={styles.backButtonText}>Back</Text>
-              </TouchableOpacity>
-            </View>
-          </KeyboardAvoidingView>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              style={styles.backButton}
+              onPress={() => navigation.goBack()}
+            >
+              <Text style={styles.backButtonText}>Back</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.nextButton}
+              onPress={() => this.handleSubmitStepPers()}
+            >
+              <Text style={styles.nextButtonText}>Next</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </TouchableWithoutFeedback>
     );

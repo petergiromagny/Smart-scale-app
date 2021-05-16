@@ -59,7 +59,7 @@ class Settings extends Component {
   }
 
   render() {
-    const { navigation, calory } = this.props;
+    const { navigation, calorieObjective } = this.props;
     return (
       <ScrollView style={styles.container}>
         <SettingsContent
@@ -94,21 +94,21 @@ class Settings extends Component {
         >
           <SettingItem
             dataLabel='Calories'
-            dataInput={calory}
+            dataInput={calorieObjective}
             maxNumber={4}
             dataType='number-pad'
             navigation={navigation}
           />
           <SettingItem
             dataLabel='Weight'
-            dataInput={calory}
+            dataInput={calorieObjective}
             maxNumber={3}
             dataType='number-pad'
             navigation={navigation}
           />
           <SettingItem
             dataLabel='Height'
-            dataInput={calory}
+            dataInput={calorieObjective}
             maxNumber={3}
             dataType='number-pad'
             navigation={navigation}
@@ -153,6 +153,8 @@ class Settings extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({ calory: state.calory.objective });
+const mapStateToProps = (state) => ({
+  calorieObjective: state.objectives.objCalorie,
+});
 
 export default connect(mapStateToProps)(Settings);

@@ -90,9 +90,14 @@ class StepFavScreen extends Component {
 
   componentDidMount() {
     const { route, dispatch } = this.props;
-    const { height, weight, objWeight, gender, age } = route.params;
-
-    const physicalActivity = 'light';
+    const {
+      height,
+      weight,
+      objWeight,
+      gender,
+      physicalActivity,
+      age,
+    } = route.params;
 
     const objCalorie = CalculateCalorie(
       gender,
@@ -106,11 +111,9 @@ class StepFavScreen extends Component {
   }
 
   handleSubmitStepFav() {
-    const { navigation, allState } = this.props;
+    const { navigation } = this.props;
 
-    console.log(allState);
-
-    // navigation.replace('Drawer');
+    navigation.replace('Drawer');
   }
 
   render() {
