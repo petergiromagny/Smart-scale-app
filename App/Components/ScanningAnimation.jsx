@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import LottieView from 'lottie-react-native';
-import * as animationLoading from '../Assets/Animations/loading.json';
+/* import LottieView from 'lottie-react-native';
+import * as animationLoading from '../Assets/Animations/loading.json'; */
 
 import colors from '../Constants/colors';
 
@@ -26,11 +26,11 @@ export default function ScanningAnimation(props) {
   return (
     <View style={styles.container}>
       <View style={{ width: radius * 2, height: radius * 2 }}>
-        <LottieView
+        {/* <LottieView
           source={animationLoading}
           style={StyleSheet.absoluteFillObject}
           autoPlay
-        />
+        /> */}
         <View style={[StyleSheet.absoluteFillObject, styles.text]}>
           <Text style={styles.text}>Scanning</Text>
           <Text style={styles.text}>your meal</Text>
