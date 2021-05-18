@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Smart Scale",
-    "slug": "SmartScale",
+    "slug": "smart-scale",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -15,9 +15,13 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.petergiromagny.smartscale",
+      "buildNumber": "1.0.0"
     },
     "android": {
+      "package": "com.petergiromagny.smartscale",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
