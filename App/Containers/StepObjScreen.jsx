@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     paddingVertical: 13,
     backgroundColor: colors.green,
     borderRadius: 10,
-    width: '48%',
+    width: '100%',
     shadowColor: colors.green,
     shadowOffset: {
       width: 0,
@@ -57,26 +57,6 @@ const styles = StyleSheet.create({
   nextButtonText: {
     fontFamily: 'PoppinsMedium',
     color: colors.background,
-    textTransform: 'uppercase',
-    textAlign: 'center',
-  },
-  backButton: {
-    paddingVertical: 13,
-    backgroundColor: colors.background,
-    borderRadius: 10,
-    width: '48%',
-    shadowColor: colors.green,
-    shadowOffset: {
-      width: 0,
-      height: 7,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 10,
-    elevation: 5,
-  },
-  backButtonText: {
-    fontFamily: 'PoppinsMedium',
-    color: colors.green,
     textTransform: 'uppercase',
     textAlign: 'center',
   },
@@ -101,7 +81,6 @@ export default class StepObjScreen extends Component {
   }
 
   render() {
-    const { navigation } = this.props;
     return (
       <TouchableWithoutFeedback
         onPress={() => Keyboard.dismiss()}
@@ -160,12 +139,6 @@ export default class StepObjScreen extends Component {
             />
 
             <View style={styles.buttonContainer}>
-              <TouchableOpacity
-                style={styles.backButton}
-                onPress={() => navigation.goBack()}
-              >
-                <Text style={styles.backButtonText}>Back</Text>
-              </TouchableOpacity>
               <TouchableOpacity
                 style={styles.nextButton}
                 onPress={() => this.handleSubmitStepObj()}

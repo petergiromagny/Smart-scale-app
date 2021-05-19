@@ -3,6 +3,7 @@ import {
   Text,
   StyleSheet,
   View,
+  ActivityIndicator,
   TouchableWithoutFeedback,
   Keyboard,
   TouchableOpacity,
@@ -11,6 +12,7 @@ import {
   Alert,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import firebase from 'firebase';
 
 import { Ionicons } from '@expo/vector-icons';
 
@@ -84,25 +86,109 @@ export default class SignUpScreen extends Component {
       lastname: '',
       email: '',
       password: '',
+      isLoading: false,
     };
   }
 
   handleSubmitSignUp() {
-    // TODO: Add Firebase auth
     const { firstname, lastname, email, password } = this.state;
     const { navigation } = this.props;
+    this.setState({ isLoading: true });
 
     if (firstname && lastname && email && password) {
-      console.log('User created & signed in');
-    } else {
-      Alert.alert('Please be sure to fill all fields');
-    }
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          const { user } = userCredential;
+          user
+            .updateProfile({
+              displayName: `${firstname} ${lastname}`,
+            })
+            .then(
+              () => {
+                this.setState({ isLoading: false });
+                navigation.navigate('StepObj', { user });
+              },
+              (error) =>
+                Alert.alert('', error, [
+                  {
+                    text: 'Ok',
+                    onPress: () => this.setState({ isLoading: false }),
+                  },
+                ])
+            );
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
 
-    console.log(`Firstname: ${firstname}`);
-    console.log(`Lastname: ${lastname}`);
-    console.log(`Email: ${email}`);
-    console.log(`Password: ${password}`);
-    // navigation.navigate('StepObj');
+          switch (errorCode) {
+            case 'auth/email-already-in-use':
+              Alert.alert('', errorMessage, [
+                {
+                  text: 'Ok',
+                  onPress: () => this.setState({ isLoading: false }),
+                },
+              ]);
+              break;
+            case 'auth/invalid-email':
+              Alert.alert('', errorMessage, [
+                {
+                  text: 'Ok',
+                  onPress: () => this.setState({ isLoading: false }),
+                },
+              ]);
+              break;
+            case 'auth/operation-not-allowed':
+              Alert.alert('', errorMessage, [
+                {
+                  text: 'Ok',
+                  onPress: () => this.setState({ isLoading: false }),
+                },
+              ]);
+              break;
+            case 'auth/weak-password':
+              Alert.alert('', errorMessage, [
+                {
+                  text: 'Ok',
+                  onPress: () => this.setState({ isLoading: false }),
+                },
+              ]);
+              break;
+
+            default:
+              Alert.alert(errorCode, errorMessage, [
+                {
+                  text: 'Ok',
+                  onPress: () => this.setState({ isLoading: false }),
+                },
+              ]);
+              break;
+          }
+        });
+    } else {
+      Alert.alert('', 'Please be sure to fill all fields');
+    }
+  }
+
+  displayLoading() {
+    const { isLoading } = this.state;
+    if (isLoading) {
+      return (
+        <View style={styles.signInButton}>
+          <ActivityIndicator color={colors.background} />
+        </View>
+      );
+    }
+    return (
+      <TouchableOpacity
+        style={styles.signInButton}
+        onPress={() => this.handleSubmitSignUp()}
+      >
+        <Text style={styles.signInButtonText}>Sign up</Text>
+      </TouchableOpacity>
+    );
   }
 
   render() {
@@ -193,12 +279,7 @@ export default class SignUpScreen extends Component {
                   }
                 />
 
-                <TouchableOpacity
-                  style={styles.signInButton}
-                  onPress={() => this.handleSubmitSignUp()}
-                >
-                  <Text style={styles.signInButtonText}>Sign up</Text>
-                </TouchableOpacity>
+                {this.displayLoading()}
 
                 <View style={styles.newUser}>
                   <Text style={styles.text}>I&apos;m already a member.</Text>

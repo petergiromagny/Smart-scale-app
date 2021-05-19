@@ -7,6 +7,7 @@ import {
   Text,
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import firebase from 'firebase';
 
 import { connect } from 'react-redux';
 import SettingsContent from '../Components/SettingsContent';
@@ -54,8 +55,10 @@ class Settings extends Component {
 
   handleSignOut() {
     const { navigation } = this.props;
-    navigation.replace('Auth');
-    console.log('Sign out');
+    firebase
+      .auth()
+      .signOut()
+      .then(() => navigation.replace('Auth'));
   }
 
   render() {

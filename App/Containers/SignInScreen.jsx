@@ -2,13 +2,16 @@ import React, { Component } from 'react';
 import {
   Text,
   StyleSheet,
+  Alert,
   View,
   TouchableWithoutFeedback,
   TouchableOpacity,
   Keyboard,
   KeyboardAvoidingView,
+  ActivityIndicator,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import firebase from 'firebase';
 
 import InputAuth from '../Components/InputAuth';
 
@@ -71,22 +74,87 @@ export default class SignInScreen extends Component {
     this.state = {
       email: '',
       password: '',
+      isLoading: false,
     };
   }
 
   handleSubmitSignIn() {
-    // TODO: Add Firebase auth + redirect to home
     const { navigation } = this.props;
     const { email, password } = this.state;
-    console.log(`Email: ${email}`);
-    console.log(`Password: ${password}`);
+    this.setState({ isLoading: true });
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(() => {
+        this.setState({ isLoading: false });
+        navigation.replace('Drawer');
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
 
-    navigation.replace('Drawer');
+        switch (errorCode) {
+          case 'auth/invalid-email':
+            Alert.alert('', errorMessage, [
+              {
+                text: 'Ok',
+                onPress: () => this.setState({ isLoading: false }),
+              },
+            ]);
+            break;
+          case 'auth/user-disabled':
+            Alert.alert('', errorMessage, [
+              {
+                text: 'Ok',
+                onPress: () => this.setState({ isLoading: false }),
+              },
+            ]);
+            break;
+          case 'auth/user-not-found':
+            Alert.alert('', errorMessage, [
+              {
+                text: 'Ok',
+                onPress: () => this.setState({ isLoading: false }),
+              },
+            ]);
+            break;
+          case 'auth/wrong-password':
+            Alert.alert('', errorMessage, [
+              {
+                text: 'Ok',
+                onPress: () => this.setState({ isLoading: false }),
+              },
+            ]);
+            break;
+
+          default:
+            Alert.alert(errorCode, errorMessage);
+            break;
+        }
+      });
+  }
+
+  displayLoading() {
+    const { isLoading } = this.state;
+    if (isLoading) {
+      return (
+        <View style={styles.signInButton}>
+          <ActivityIndicator color={colors.background} />
+        </View>
+      );
+    }
+    return (
+      <TouchableOpacity
+        style={styles.signInButton}
+        onPress={() => this.handleSubmitSignIn()}
+      >
+        <Text style={styles.signInButtonText}>Sign in</Text>
+      </TouchableOpacity>
+    );
   }
 
   render() {
     const { navigation } = this.props;
-
     return (
       <TouchableWithoutFeedback
         onPress={() => Keyboard.dismiss()}
@@ -131,12 +199,7 @@ export default class SignInScreen extends Component {
               }
             />
 
-            <TouchableOpacity
-              style={styles.signInButton}
-              onPress={() => this.handleSubmitSignIn()}
-            >
-              <Text style={styles.signInButtonText}>Sign in</Text>
-            </TouchableOpacity>
+            {this.displayLoading()}
 
             <View style={styles.newUser}>
               <Text style={styles.text}>I&apos;m new user.</Text>

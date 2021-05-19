@@ -11,6 +11,12 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import * as Font from 'expo-font';
 
 /**
+ * @import Firebase
+ */
+import * as firebase from 'firebase';
+import firebaseConfig from './API/Keys/FirebaseConfig';
+
+/**
  * @import Fonts
  */
 import PopRegular from './Assets/Font/Poppins-Regular.ttf';
@@ -29,6 +35,10 @@ import Main from './Routes/Main';
  * @import Redux Store
  */
 import store from './Redux';
+
+if (firebase.apps.length === 0) {
+  firebase.initializeApp(firebaseConfig);
+}
 
 const styles = StyleSheet.create({
   container: {
