@@ -9,12 +9,12 @@ import {
   TouchableOpacity,
   ScrollView,
   KeyboardAvoidingView,
-  Alert,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import firebase from 'firebase';
 
 import { Ionicons } from '@expo/vector-icons';
+
+import { setUserAccount } from '../API/Firebase/Auth';
 
 import InputAuth from '../Components/InputAuth';
 
@@ -95,81 +95,9 @@ export default class SignUpScreen extends Component {
     const { navigation } = this.props;
     this.setState({ isLoading: true });
 
-    if (firstname && lastname && email && password) {
-      firebase
-        .auth()
-        .createUserWithEmailAndPassword(email, password)
-        .then((userCredential) => {
-          const { user } = userCredential;
-          user
-            .updateProfile({
-              displayName: `${firstname} ${lastname}`,
-            })
-            .then(
-              () => {
-                this.setState({ isLoading: false });
-                navigation.navigate('StepObj', { user });
-              },
-              (error) =>
-                Alert.alert('', error, [
-                  {
-                    text: 'Ok',
-                    onPress: () => this.setState({ isLoading: false }),
-                  },
-                ])
-            );
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-
-          switch (errorCode) {
-            case 'auth/email-already-in-use':
-              Alert.alert('', errorMessage, [
-                {
-                  text: 'Ok',
-                  onPress: () => this.setState({ isLoading: false }),
-                },
-              ]);
-              break;
-            case 'auth/invalid-email':
-              Alert.alert('', errorMessage, [
-                {
-                  text: 'Ok',
-                  onPress: () => this.setState({ isLoading: false }),
-                },
-              ]);
-              break;
-            case 'auth/operation-not-allowed':
-              Alert.alert('', errorMessage, [
-                {
-                  text: 'Ok',
-                  onPress: () => this.setState({ isLoading: false }),
-                },
-              ]);
-              break;
-            case 'auth/weak-password':
-              Alert.alert('', errorMessage, [
-                {
-                  text: 'Ok',
-                  onPress: () => this.setState({ isLoading: false }),
-                },
-              ]);
-              break;
-
-            default:
-              Alert.alert(errorCode, errorMessage, [
-                {
-                  text: 'Ok',
-                  onPress: () => this.setState({ isLoading: false }),
-                },
-              ]);
-              break;
-          }
-        });
-    } else {
-      Alert.alert('', 'Please be sure to fill all fields');
-    }
+    setUserAccount(email, password, firstname, lastname, navigation).then(() =>
+      this.setState({ isLoading: false })
+    );
   }
 
   displayLoading() {

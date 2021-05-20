@@ -11,7 +11,8 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import firebase from 'firebase';
+
+import { getUserAccount } from '../API/Firebase/Auth';
 
 import InputAuth from '../Components/InputAuth';
 
@@ -82,56 +83,10 @@ export default class SignInScreen extends Component {
     const { navigation } = this.props;
     const { email, password } = this.state;
     this.setState({ isLoading: true });
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(() => {
-        this.setState({ isLoading: false });
-        navigation.replace('Drawer');
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
 
-        switch (errorCode) {
-          case 'auth/invalid-email':
-            Alert.alert('', errorMessage, [
-              {
-                text: 'Ok',
-                onPress: () => this.setState({ isLoading: false }),
-              },
-            ]);
-            break;
-          case 'auth/user-disabled':
-            Alert.alert('', errorMessage, [
-              {
-                text: 'Ok',
-                onPress: () => this.setState({ isLoading: false }),
-              },
-            ]);
-            break;
-          case 'auth/user-not-found':
-            Alert.alert('', errorMessage, [
-              {
-                text: 'Ok',
-                onPress: () => this.setState({ isLoading: false }),
-              },
-            ]);
-            break;
-          case 'auth/wrong-password':
-            Alert.alert('', errorMessage, [
-              {
-                text: 'Ok',
-                onPress: () => this.setState({ isLoading: false }),
-              },
-            ]);
-            break;
-
-          default:
-            Alert.alert(errorCode, errorMessage);
-            break;
-        }
-      });
+    getUserAccount(email, password, navigation).then(() =>
+      this.setState({ isLoading: false })
+    );
   }
 
   displayLoading() {
