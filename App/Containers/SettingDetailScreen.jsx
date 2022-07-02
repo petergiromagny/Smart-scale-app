@@ -78,6 +78,7 @@ export default function SettingDetailScreen({ route, navigation }) {
 
   // Action for save button
   const updateSetting = () => {
+    // eslint-disable-next-line no-console
     console.log(dataUpdate);
     navigation.goBack();
   };

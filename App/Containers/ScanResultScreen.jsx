@@ -113,6 +113,7 @@ export default class ScanResultScreen extends Component {
 
   handleAddMeal() {
     const { navigation } = this.props;
+    // eslint-disable-next-line no-console
     console.log('Meals added');
     navigation.goBack();
   }
@@ -128,11 +129,13 @@ export default class ScanResultScreen extends Component {
         [
           {
             text: 'No',
+            // eslint-disable-next-line no-console
             onPress: () => console.log(`${item} is gonna be saved`),
             style: 'cancel',
           },
           {
             text: 'Yes',
+            // eslint-disable-next-line no-console
             onPress: () => console.log(`${item} is deleted`),
           },
         ]

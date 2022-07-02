@@ -113,3 +113,6 @@ dist
 
 # API KEYS
 App/API/Keys
+
+# Jetbrains file
+.idea
